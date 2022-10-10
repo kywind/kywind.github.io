@@ -217,11 +217,8 @@
     </div>-->
     
     <h2 class="title is-3">Model Architecture</h3>
-    <p> GroupViT contains a hierarchy of Transformer layers grouped into stages, each operating on progressively larger visual segments.
-        The images on the right show visual segments that emerge during different grouping stages.
-        The lower stage groups pixels into object parts, e.g., noses and legs of elephants; and the higher stage further merges them into entire objects, e.g., the whole elephant and the background forest.
-        Each grouping stage ends with a grouping block that computes the similarity between the learned group tokens and segment (image) tokens. 
-        The segment tokens assigned to the same group are merged together and represent new segment tokens that are input to the next grouping stage.</p>
+    <p> Given the input image, the image encoder and feature extractor predict per-pixel features, and establish dense geometric correspondence with mesh per-vertex features. 2D reconstruction loss and cycle consistency loss provide supervision for the model.
+     </p>
     <div class="columns is-centered has-text-centered">
       <div class="column is-fullwidth">
         <img src="images/sample.jpeg" alt="">
@@ -231,6 +228,19 @@
         </video> -->
       </div>
     </div>
+
+    <h2 class="title is-3">Cycle Consistency</h3>
+      <p> 
+      </p>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-fullwidth">
+          <img src="images/sample.jpeg" alt="">
+          <!-- 
+          <video autoplay muted loop playsinline controls>
+            <source src="images/dmcontrol-gb.png" type="image/png">
+          </video> -->
+        </div>
+      </div>
 
   </div>
 </section>
