@@ -54,7 +54,7 @@
 
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>2</sup>Tsinghua University,</span>
-            <span class="author-block"><sup>1</sup>University of California San Diego,</span>
+            <span class="author-block"><sup>1</sup>UC San Diego,</span>
             <span class="author-block"><sup>2</sup>Qualcomm AI Research</span>
           </div>
           <!--<div class="is-size-6 publication-authors">-->
@@ -142,13 +142,12 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-<!--       <video autoplay muted loop playsinline height="100%">
-        <source src="figs/website_teaser.m4v" type="video/mp4">
-        <source src="images/dmcontrol-gb.png" type="image/png">
+      <video autoplay muted loop playsinline height="100%">
+        <source src="vids/teaser.mp4" type="video/mp4">
       </video>  -->
-      <img src="images/sample.png" alt="">
+      <!--<img src="images/self-pose-teaser.png" alt="">-->
       <h2 class="subtitle has-text-centered">
-        Without using any 3D annotations, our model estimates the dense geometric correspondence between image and mesh, and the 6D pose of objects.
+        Without using any 3D annotations, our model estimates the dense 2D-3D geometric correspondence and the 6D pose of objects.
         <!--<span style="color: orange; font-weight:bold">Without using any mask annotations</span>, GroupVit groups the image into segments and outputs a semantic segmentation map.-->
       </h2>
       </div>
@@ -191,7 +190,7 @@
       <div class="column is-full-width">
         <h2 class="title is-3">Video</h2>
         <div class="publication-video">
-          <iframe src="https://www.youtube.com/embed/DtJsWIUTW-Y"
+          <iframe src="https://www.youtube.com/embed/IeteYvPkpFk"ywind
                   frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
       </div>
@@ -217,18 +216,18 @@
     </div>
     </div>-->
     
-    <h2 class="title is-3">Model Architecture</h3>
+    <h2 class="title is-3">Method Overview</h3>
     <div class="content has-text-justified">
-      <p> Given the input image, the image encoder and feature extractor predict per-pixel features, and establish dense geometric correspondence with mesh per-vertex features. 2D reconstruction loss and cycle consistency loss provide supervision for the model.
+      <p> Given the input image and a categorical canonical mesh learned by our model, we extract image per-pixel and mesh per-vertex features, and establish dense geometric correspondences via feature similarity in a shared embedding space. 
       </p>
     </div>
     <div class="columns is-centered has-text-centered">
       <div class="column is-fullwidth">
-        <img src="images/sample.png" alt="">
-        <!-- 
+        <!--<img src="images/sample.png" alt="">-->
+        
         <video autoplay muted loop playsinline controls>
-          <source src="images/dmcontrol-gb.png" type="image/png">
-        </video> -->
+          <source src="vids/method1.mp4" type="video/mp4">
+        </video> 
       </div>
     </div>
 
