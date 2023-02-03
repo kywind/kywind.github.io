@@ -19,6 +19,10 @@ function setInterpolationImage(i) {
   $('#interpolation-image-wrapper').empty().append(image);
 }
 
+function showProjects() {
+  var id = document.getElementById("projects");
+  id.style.display = "none";
+}
 
 $(document).ready(function() {
     // Check for click events on the navbar burger icon
