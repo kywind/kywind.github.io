@@ -54,20 +54,34 @@
 
           <div class="is-size-5 publication-authors">
             <span class="author-block">* Equal contribution</span>
+          </div>
+
+          <div class="is-size-4 publication-authors">
+            <span class="author-block"><b>ICRA2024 Workshop on Representing and Manipulating Deformable Objects </b></span>
+          </div>
 
           <div class="column has-text-centered">
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://kywind.github.io/adaptigraph"
+                <a href="./pdf/24ICRAW_AdaptiGraph.pdf"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                   </span>
-                  <span>Paper</span>
+                  <span>Paper (3 pages)</span>
                 </a>
               </span>
               <span class="link-block">
+                <a href="./pdf/24ICRAW_AdaptiGraph_supplementary.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Supplementary material</span>
+                </a>
+              </span>
+              <!-- <span class="link-block">
                 <a href="https://kywind.github.io/adaptigraph"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -75,20 +89,93 @@
                   </span>
                   <span>arXiv</span>
                 </a>
-              </span>
+              </span> -->
               <span class="link-block">
                 <a href="https://kywind.github.io/adaptigraph"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
-                  <span>Code</span>
+                  <span>Code (coming soon)</span>
                   </a>
               </span>
-
+              <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=lL0J_aLPKFM"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video (3-min)</span>
+                  </a>
+              </span>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <center>
+        <img src='images/adaptigraph-teaser.jpg'>
+      </center>
+      <h2 class="subtitle has-text-centered">
+        Objects made from different materials can exhibit distinct behaviors under interactions. 
+      </h2>
+      <center>
+        <img src='images/adaptigraph-method.jpg'>
+      </center>
+      <!-- <h2 class="subtitle has-text-centered">
+        We integrate a physical property-conditioned dynamics model with online physical property estimation. 
+      </h2> -->
+      <h2 class="subtitle has-text-centered">
+        Our framework enables robots to adaptively manipulate diverse objects with varying physical properties and dynamics.
+      </h2>
+      </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+          <p>
+            This paper introduces AdaptiGraph, a learning-based dynamics modeling approach 
+            that enables robots to predict, adapt to, and control a wide array of challenging 
+            deformable materials with unknown physical properties. AdaptiGraph leverages the 
+            highly flexible graph-based neural dynamics (GBND) framework, which represents 
+            material bits as particles and employs a graph neural network (GNN) to predict 
+            particle motion. Its key innovation is a unified physical property-conditioned 
+            GBND model capable of predicting the motions of diverse materials with varying 
+            physical properties without retraining. Upon encountering new materials during 
+            online deployment, AdaptiGraph utilizes a physical property optimization process 
+            for a few-shot adaptation of the model, enhancing its fit to the observed 
+            interaction data. The adapted models can precisely simulate the dynamics and predict 
+            the motion of various deformable materials, such as ropes, granular media, rigid 
+            boxes, and cloth, while adapting to different physical properties, including 
+            stiffness, granular size, and center of pressure. On prediction and manipulation 
+            tasks involving a diverse set of real-world deformable objects, our method exhibits 
+            superior prediction accuracy and task proficiency over non-material-conditioned and 
+            non-adaptive models.
+           </p>
+          </div>
+        </div>
+      </div>
+      <!-- Paper video. -->
+      <!-- <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Video</h2>
+          <video autoplay loop playsinline controls width="100%">
+            <source src="https://drive.google.com/uc?export=download&id=1LQU9OKitE9ObB44_Q6nXtd3-ScG2RD14" type="video/mp4">
+          </video>
+        </div>
+      </div> -->
     </div>
   </div>
 </section>
