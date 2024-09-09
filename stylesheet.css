@@ -81,33 +81,33 @@
   p,
   a {
     font-family: 'Open Sans', Verdana, Helvetica, sans-serif;
-    font-size: 18px;
-    line-height: 1.4;
+    font-size: 16px;
+    line-height: 1.2;
   }
   
   strong {
     font-family: 'Open Sans', Verdana, Helvetica, sans-serif;
-    font-size: 18px;
-    line-height: 1.4;
+    font-size: 16px;
+    line-height: 1.2;
   }
   
   heading {
     font-family: 'Open Sans', Verdana, Helvetica, sans-serif;
-    font-size: 36px;
+    font-size: 32px;
     line-height: 1.2;
   }
   
   papertitle {
     font-family: 'Open Sans', Verdana, Helvetica, sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
-    line-height: 1.4;
+    line-height: 1.2;
   }
   
   name {
     font-family: ''Open Sans'', Verdana, Helvetica, sans-serif;
-    font-size: 40px;
-    line-height: 1.4;
+    font-size: 36px;
+    line-height: 1.2;
   }
   
   .one {
