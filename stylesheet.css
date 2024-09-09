@@ -81,13 +81,13 @@
   p,
   a {
     font-family: 'Open Sans', Verdana, Helvetica, sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1.4;
   }
   
   strong {
     font-family: 'Open Sans', Verdana, Helvetica, sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1.4;
   }
   
@@ -99,7 +99,7 @@
   
   papertitle {
     font-family: 'Open Sans', Verdana, Helvetica, sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     line-height: 1.4;
   }
