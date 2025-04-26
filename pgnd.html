@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Particle-Grid Neural Dynamics for Learning Deformable Object Models from RGB-D Videos.">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Particle-Grid Neural Dynamics for Learning Deformable Object Models from RGB-D Videos</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-2 publication-title">Particle-Grid Neural Dynamics for Learning Deformable Object Models from RGB-D Videos</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a target="_blank" href="https://kywind.github.io">Kaifeng Zhang</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a target="_blank" href="https://boey-li.github.io/">Baoyu Li</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a target="_blank" href="https://kkhauser.web.illinois.edu/">Kris Hauser</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a target="_blank" href="https://yunzhuli.github.io/">Yunzhu Li</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Columbia University</span>&nbsp;&nbsp;
+            <span class="author-block"><sup>2</sup>University of Illinois Urbana-Champaign</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="is-size-4 publication-authors">
+              <span class="author-block"><b>Robotics: Science and Systems (RSS), 2025</b></span>
+            </div>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://kywind.github.io/pgnd"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- <span class="link-block">
+                <a href="https://arxiv.org/abs/2210.07199"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv (coming soon)</span>
+                </a>
+              </span> -->
+              <span class="link-block">
+                <a href="https://kywind.github.io/pgnd"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (coming soon)</span>
+                  </a>
+              </span>
+              <!-- <span class="link-block">
+                <a href="https://x.com/xiaolonw/status/1580767003903606784"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-twitter"></i>
+                  </span>
+                  <span>Thread</span>
+                  </a>
+              </span> -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video autoplay muted loop playsinline height="100%">
+        <source src="vids/self-pose/teaser.mp4" type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        Without using any 3D annotations, our model estimates the dense 2D-3D geometric correspondence and the 6D pose of objects.
+      </h2>
+      <video autoplay muted loop playsinline height="100%">
+        <source src="vids/self-pose/wild6d-vid.mp4" type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        The video estimation results are generated per-frame.
+      </h2>
+      </div>
+  </div>
+</section> -->
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+          <p>
+            Modeling the dynamics of deformable objects is challenging due to their diverse physical properties 
+            and the difficulty of estimating states from limited visual information. We address these challenges 
+            with a neural dynamics framework that combines object particles and spatial grids in a hybrid 
+            representation. Our particle-grid model captures global shape and motion information while predicting 
+            dense particle movements, enabling the modeling of objects with varied shapes and materials. 
+            Particles represent object shapes, while the spatial grid discretizes the 3D space to ensure spatial 
+            continuity and enhance learning efficiency. Coupled with Gaussian Splattings for visual rendering, 
+            our framework achieves a fully learning-based digital twin of deformable objects and generates 
+            3D action-conditioned videos. Through experiments, we demonstrate that our model learns the dynamics 
+            of diverse objects—such as ropes, cloths, stuffed animals, and paper bags—from sparse-view RGB-D 
+            recordings of robot-object interactions, while also generalizing at the category level to unseen instances. 
+            Our approach outperforms state-of-the-art learning-based and physics-based simulators, particularly 
+            in scenarios with limited camera views. Furthermore, we showcase the utility of our learned models in 
+            model-based planning, enabling goal-conditioned object manipulation across a range of tasks.
+           </p>
+          </div>
+        </div>
+      </div>
+      <!-- Paper video. -->
+      <!-- <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Video</h2>
+          <video autoplay loop playsinline controls width="100%">
+            <source src="https://drive.google.com/uc?export=download&id=1LQU9OKitE9ObB44_Q6nXtd3-ScG2RD14" type="video/mp4">
+          </video>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</section>
+
+
+<!-- <section class="section">
+  <div class="container is-max-widescreen">
+    
+    <h2 class="title is-3">Method Overview</h3>
+    <div class="content has-text-justified">
+      <p> Given the input image and a categorical canonical mesh learned by our model, we extract image per-pixel and mesh per-vertex embeddings, and establish dense geometric correspondences via feature similarity in the embedding space. 
+      </p>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-fullwidth">
+        <video autoplay muted loop playsinline>
+          <source src="vids/self-pose/method.mp4" type="video/mp4">
+        </video> 
+      </div>
+    </div>
+
+    <h2 class="title is-3">Cycle Consistency</h3>
+      <p> 
+        We propose novel losses that establish cycle consistency across 2D and 3D space. 
+        The instance cycle consistency loss encourages the consistency between correspondence and an estimated camera projection.
+        The cross-instance and cross-time cycle consistency loss goes beyond a single image-mesh pair to cross-instance and cross-time 
+        images, encouraging category-level semantic consistency.
+      </p>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-fullwidth">
+          <video autoplay muted loop playsinline>
+            <source src="vids/self-pose/cc.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+  </div>
+</section>
+
+<section class="hero is-small">
+  <div class="hero-body">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-3">Results</h2>
+    <div class="columns">
+      <div class="column">
+        <p>
+          We evaluate our method on the Wild6D, NOCS-REAL275 and CUB-200-2011. On Wild6D and REAL275, we visualize the correspondence and 
+          pose estimation results. The model is trained on Wild6D training set which contains no 3D annotations, 
+          and tested on Wild6D test set and REAL275 test set by zero-shot transfer.
+          On CUB-200-2011, we visualize the correspondence and keypoint transfer results.
+        </p>
+      </div>
+    </div>
+
+    <h3 class="title is-4">Wild6D</h3>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-fullwidth">
+        <video autoplay muted loop playsinline>
+          <source src="vids/self-pose/wild6d.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+    <h3 class="title is-4">REAL275</h3>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-fullwidth">
+        <video autoplay muted loop playsinline>
+          <source src="vids/self-pose/nocs.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+    <h3 class="title is-4">CUB-200-2011</h3>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-fullwidth">
+        <img src="images/cubmatch.png" alt="">
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-fullwidth">
+        <img src="images/kp.png" alt="">
+      </div>
+    </div>
+  </div>
+  </div>
+</section> -->
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>
+@inproceedings{zhang2024particle,
+  title={Particle-Grid Neural Dynamics for Learning Deformable Object Models from RGB-D Videos},
+  author={Zhang, Kaifeng and Li, Baoyu and Hauser, Kris and Li, Yunzhu},
+  booktitle={Proceedings of Robotics: Science and Systems (RSS)},
+  year={2025}
+}
+    </code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/kywind" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="content">
+        <p>
+          The template is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
