@@ -52,9 +52,9 @@
             <span class="author-block"><sup>1</sup>Columbia University</span>&nbsp;&nbsp;
             <span class="author-block"><sup>2</sup>University of Illinois Urbana-Champaign</span>
           </div>
-
+          
           <div class="column has-text-centered">
-            <div class="is-size-4 publication-authors">
+            <div class="is-size-5 publication-authors">
               <span class="author-block"><b>Robotics: Science and Systems (RSS), 2025</b></span>
             </div>
           </div>
@@ -63,7 +63,7 @@
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://kywind.github.io/pgnd"
+                <a href="https://www.roboticsproceedings.org/rss21/p036.pdf"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -71,34 +71,43 @@
                   <span>Paper</span>
                 </a>
               </span>
-              <!-- <span class="link-block">
-                <a href="https://arxiv.org/abs/2210.07199"
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2506.15680"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
                   </span>
-                  <span>arXiv (coming soon)</span>
+                  <span>arXiv</span>
                 </a>
-              </span> -->
+              </span>
               <span class="link-block">
-                <a href="https://kywind.github.io/pgnd"
+                <a href="https://github.com/kywind/pgnd"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
-                  <span>Code (coming soon)</span>
+                  <span>Code</span>
                   </a>
               </span>
-              <!-- <span class="link-block">
-                <a href="https://x.com/xiaolonw/status/1580767003903606784"
+              <span class="link-block">
+                <a href="https://kywind.github.io/pgnd"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-twitter"></i>
                   </span>
                   <span>Thread</span>
                   </a>
-              </span> -->
-
+              </span>
+              <span class="link-block">
+                <a href="https://kywind.github.io/pgnd"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    🤗
+                  </span>
+                  <span>Interactive Demo</span>
+                </a>
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -106,24 +115,18 @@
   </div>
 </section>
 
-<!-- <section class="hero teaser">
+<section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <video autoplay muted loop playsinline height="100%">
-        <source src="vids/self-pose/teaser.mp4" type="video/mp4">
-      </video>
       <h2 class="subtitle has-text-centered">
-        Without using any 3D annotations, our model estimates the dense 2D-3D geometric correspondence and the 6D pose of objects.
+        Particle-Grid Neural Dynamics is a learning-based digital twin framework for deformable objects, trained on real RGB-D videos and operable directly on raw observations.
       </h2>
       <video autoplay muted loop playsinline height="100%">
-        <source src="vids/self-pose/wild6d-vid.mp4" type="video/mp4">
+        <source src="vids/pgnd/teaser.mp4" type="video/mp4">
       </video>
-      <h2 class="subtitle has-text-centered">
-        The video estimation results are generated per-frame.
-      </h2>
       </div>
   </div>
-</section> -->
+</section>
 
 <section class="hero is-light is-small">
   <div class="hero-body">
@@ -153,49 +156,51 @@
         </div>
       </div>
       <!-- Paper video. -->
-      <!-- <div class="columns is-centered has-text-centered">
+      <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
           <h2 class="title is-3">Video</h2>
-          <video autoplay loop playsinline controls width="100%">
-            <source src="https://drive.google.com/uc?export=download&id=1LQU9OKitE9ObB44_Q6nXtd3-ScG2RD14" type="video/mp4">
-          </video>
+          <iframe src="https://www.youtube.com/embed/SZThFL6gfXg"
+            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </section>
 
 
-<!-- <section class="section">
+<section class="section">
   <div class="container is-max-widescreen">
     
-    <h2 class="title is-3">Method Overview</h3>
-    <div class="content has-text-justified">
-      <p> Given the input image and a categorical canonical mesh learned by our model, we extract image per-pixel and mesh per-vertex embeddings, and establish dense geometric correspondences via feature similarity in the embedding space. 
-      </p>
-    </div>
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-fullwidth">
-        <video autoplay muted loop playsinline>
-          <source src="vids/self-pose/method.mp4" type="video/mp4">
-        </video> 
-      </div>
-    </div>
-
-    <h2 class="title is-3">Cycle Consistency</h3>
+    <h2 class="title is-3">Motivation</h3>
       <p> 
-        We propose novel losses that establish cycle consistency across 2D and 3D space. 
-        The instance cycle consistency loss encourages the consistency between correspondence and an estimated camera projection.
-        The cross-instance and cross-time cycle consistency loss goes beyond a single image-mesh pair to cross-instance and cross-time 
-        images, encouraging category-level semantic consistency.
+        Simulating deformable objects like cloths and ropes is hard because of their 
+        complex physics and partial observability. In this work, 
+        we overcome these challenges by learning a neural model for object dynamics 
+        directly from real-world videos.
       </p>
       <div class="columns is-centered has-text-centered">
         <div class="column is-fullwidth">
           <video autoplay muted loop playsinline>
-            <source src="vids/self-pose/cc.mp4" type="video/mp4">
+            <source src="vids/pgnd/motivation.mp4" type="video/mp4">
           </video>
         </div>
       </div>
+
+    <h2 class="title is-3">Method</h3>
+    <div class="content has-text-justified">
+      <p> 
+        The particle-based neural dynamics model represents objects as dense 3D particles 
+        and predicts their next-step velocities to simulate the object dynamics.
+        It consists of three stages: particle encoding, grid velocity editing, and grid-to-particle velocity transfer.
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-fullwidth">
+        <video autoplay muted loop playsinline>
+          <source src="vids/pgnd/method.mp4" type="video/mp4">
+        </video> 
+      </div>
+    </div>
+
 
   </div>
 </section>
@@ -207,46 +212,88 @@
     <div class="columns">
       <div class="column">
         <p>
-          We evaluate our method on the Wild6D, NOCS-REAL275 and CUB-200-2011. On Wild6D and REAL275, we visualize the correspondence and 
-          pose estimation results. The model is trained on Wild6D training set which contains no 3D annotations, 
-          and tested on Wild6D test set and REAL275 test set by zero-shot transfer.
-          On CUB-200-2011, we visualize the correspondence and keypoint transfer results.
+          We evaluate our method on 6 diverse deformable object categories, including ropes, cloths, stuffed animals, and paper bags.
+          Our model is trained separately on each category using less than 20 minutes of RGB-D videos of robot-object interactions.
         </p>
       </div>
     </div>
 
-    <h3 class="title is-4">Wild6D</h3>
+    <h3 class="title is-4">Future Prediction</h3>
+    <div class="columns">
+      <div class="column">
+        <p>
+          Given initial states and actions, we show the prediction results of the GBND
+          baseline compared to our particle-grid neural dynamics model. We
+          overlay the predictions with ground truth final state images to highlight the prediction errors. PGND's predictions are more aligned with
+          the ground truth, offering higher-density particle predictions and fewer artifacts compared to the baseline.
+        </p>
+      </div>
+    </div>
     <div class="columns is-centered has-text-centered">
       <div class="column is-fullwidth">
         <video autoplay muted loop playsinline>
-          <source src="vids/self-pose/wild6d.mp4" type="video/mp4">
+          <source src="vids/pgnd/particle.mp4" type="video/mp4">
         </video>
       </div>
     </div>
 
-    <h3 class="title is-4">REAL275</h3>
+    <h3 class="title is-4">3D Action-Conditioned Video Prediction</h3>
+    <div class="columns">
+      <div class="column">
+        <p>
+          When plugged into a Gaussian Splatting renderer, PGND can generate high-quality 3D action-conditioned videos.
+          PGND's results aligns better with
+          the ground truth while the SOTA baseline method predicts visually nonrealistic deformations.
+        </p>
+      </div>
+    </div>
     <div class="columns is-centered has-text-centered">
       <div class="column is-fullwidth">
         <video autoplay muted loop playsinline>
-          <source src="vids/self-pose/nocs.mp4" type="video/mp4">
+          <source src="vids/pgnd/gs.mp4" type="video/mp4">
         </video>
       </div>
     </div>
 
-    <h3 class="title is-4">CUB-200-2011</h3>
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-fullwidth">
-        <img src="images/cubmatch.png" alt="">
+    
+    <h3 class="title is-4">Simulation with 3D Gaussians</h3>
+    <div class="columns">
+      <div class="column">
+        <p>
+          PGND can serve as a deformable object simulator given Gaussian Splatting reconstructions of the scene. 
+          Given only the initial static reconstruction, we apply PGND to simulate the segmented object given a sequence of actions (red arrows).
+        </p>
       </div>
     </div>
     <div class="columns is-centered has-text-centered">
       <div class="column is-fullwidth">
-        <img src="images/kp.png" alt="">
+        <video autoplay muted loop playsinline>
+          <source src="vids/pgnd/hq.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+    <h3 class="title is-4">Model-Based Planning</h3>
+    <div class="columns">
+      <div class="column">
+        <p>
+          PGND can be integrated with MPC to generate actions for manipulating objects.
+          We test on 4 tasks with distinct object types: cloth lifting, box
+          closing, rope manipulation, and plush toy relocating. In all tasks, our
+          method produces results that are closer to the target.
+        </p>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-fullwidth">
+        <video autoplay muted loop playsinline>
+          <source src="vids/pgnd/planning.mp4" type="video/mp4">
+        </video>
       </div>
     </div>
   </div>
   </div>
-</section> -->
+</section>
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
@@ -275,9 +322,9 @@
       </a>
     </div>
     <div class="columns is-centered">
-      <div class="content">
+      <div class="content has-text-centered">
         <p>
-          The template is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>
+          The template is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
         </p>
       </div>
     </div>
