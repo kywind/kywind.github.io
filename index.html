@@ -10,7 +10,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
-  <!-- <link rel="icon" type="image/png" href="images/ucsd-logo.png"> -->
 </head>
 <script async type="text/javascript" src="static/js/index.js"></script>
 
@@ -61,53 +60,19 @@
             </tbody>
           </table>
 
-          <!-- <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-            <tbody>
-              <tr>
-                <td style="padding:20px;width:100%;vertical-align:middle">
-                  <heading>News</heading>
-                  <p>
-                      <li>
-                        [2024.9] <a href="https://gs-dynamics.github.io/">GS-Dynamics</a> gets accepted to CoRL 2024.
-                      <li>
-                        [2024.8] After a wonderful year at UIUC, I will be joining Columbia University to continue my PhD.
-                      </li>
-                      <li>
-                        [2024.5] <a href="https://robopil.github.io/adaptigraph/">AdaptiGraph</a> is selected as the Best Abstract Award at the 
-                        <a href="https://deformable-workshop.github.io/icra2024/">4th RMDO Workshop @ ICRA2024</a>.
-                      </li>
-                      <li>
-                        [2024.5] <a href="https://robopil.github.io/adaptigraph/">AdaptiGraph</a> is accepted to RSS 2024.
-                      </li>
-                      <li>
-                        [2023.8] Starting my PhD at UIUC, advised by <a href="https://yunzhuli.github.io/">Prof. Yunzhu Li</a>.
-                      </li>
-                      <li>
-                        [2023.6] Graduated from Tsinghua University.
-                      </li>
-                      <li>
-                        [2023.1] One paper gets accepted to ICLR 2023.
-                      </li>
-                      <li>
-                        [2022.7] One paper gets accepted to ECCV 2022.
-                      </li>
-                  </p>
-                </td>
-              </tr>
-            </tbody>
-          </table> -->
-
           <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
             <tbody>
               <tr>
                 <td style="padding:20px;width:100%;vertical-align:middle">
-                  <heading>Publications</heading>
+                  <heading>Publications</heading> &nbsp;&nbsp;
+                  (<a href="" id="select0" onclick="showPubs(0); return false;">show selected</a> /
+                  <a href="" id="select1" onclick="showPubs(1); return false;">show all</a>)
                 </td>
               </tr>
             </tbody>
           </table>
 
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+          <table class="pub_selected" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
             <tbody>
               <tr>
                 <td style="padding:20px;width:30%;vertical-align:middle">
@@ -151,7 +116,7 @@
             </tbody>
           </table>
 
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+          <table class="pub_selected" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
             <tbody>
               <tr>
                 <td style="padding:20px;width:30%;vertical-align:middle">
@@ -191,7 +156,7 @@
             </tbody>
           </table>
 
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+          <table class="pub_selected" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
             <tbody>
               <tr>
                 <td style="padding:20px;width:30%;vertical-align:middle">
@@ -231,7 +196,7 @@
             </tbody>
           </table>
 
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+          <table class="pub_all" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
             <tbody>
               <tr>
                 <td style="padding:20px;width:30%;vertical-align:middle">
@@ -270,7 +235,7 @@
             </tbody>
           </table>
 
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+          <table class="pub_selected" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
             <tbody>
               <tr>
                 <td style="padding:20px;width:30%;vertical-align:middle">
@@ -310,7 +275,7 @@
             </tbody>
           </table>
 
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+          <table class="pub_all" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
             <tbody>
               <tr>
                 <td style="padding:20px;width:30%;vertical-align:middle">
@@ -345,7 +310,7 @@
             </tbody>
           </table>
           
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+          <table class="pub_all" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
             <tbody>
               <tr>
                 <td style="padding:20px;width:30%;vertical-align:middle">
@@ -386,7 +351,7 @@
             </tbody>
           </table>
 
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+          <table class="pub_all" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
             <tbody>
               <tr>
                 <td style="padding:20px;width:30%;vertical-align:middle">
@@ -415,10 +380,6 @@
                     We show that fusing fine-grained features learned with low-level contrastive objectives and semantic features 
                     from image-level objectives can improve SSL pretraining.
                   </p>
-                  <!-- <p>
-                    We show that fine-grained features learned with low-level contrastive objectives are 
-                    complementary to semantic features from image-level SSL methods. Fusing these features can significantly improve the performance for downstream tasks.
-                  </p> -->
                 </td>
               </tr>
             </tbody>
@@ -455,5 +416,26 @@
     </tbody>
   </table>
 </body>
+
+<script>
+function showPubs(mode) {
+  const pubs = document.querySelectorAll('.pub_selected, .pub_all');
+
+  pubs.forEach(pub => {
+    if (mode === 0) {
+      if (pub.classList.contains('pub_selected')) {
+        pub.style.display = "";
+      } else {
+        pub.style.display = "none";
+      }
+    } else {
+      pub.style.display = "";
+    }
+  });
+  document.getElementById("select0").style.fontWeight = mode === 0 ? "bold" : "normal";
+  document.getElementById("select1").style.fontWeight = mode === 1 ? "bold" : "normal";
+}
+</script>
+<script>showPubs(0);</script>
 
 </html>
