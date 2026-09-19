@@ -226,6 +226,27 @@
       object-fit: cover;
       display: block;
     }
+    .pub-media.media-contain img, .pub-media.media-contain video {
+      object-fit: contain;
+      background: #17191d;
+    }
+    .media-badge {
+      position: absolute;
+      z-index: 2;
+      left: 8px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(16, 18, 22, .76);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      line-height: 1.4;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+    .media-badge.left { top: 8px; }
+    .media-badge.right { top: 8px; left: calc(50% + 8px); }
     .pub.is-rep .pub-media::after {
       content: "";
       position: absolute; inset: 0;
@@ -367,13 +388,124 @@
       <div class="section-head reveal">
         <h2>Publications</h2>
         <div class="toggle" role="group" aria-label="Filter publications">
-          <button id="select0" onclick="showPubs(0)">Selected</button>
-          <button id="select1" class="active" onclick="showPubs(1)">All</button>
+          <button id="select0" class="active" onclick="showPubs(0)">Selected</button>
+          <button id="select1" onclick="showPubs(1)">All</button>
         </div>
       </div>
       <p class="note reveal">
         * indicates equal contribution. Representative papers are <span class="hl-swatch">highlighted</span>.
       </p>
+
+      <!-- PointZero -->
+      <article class="pub pub_all reveal">
+        <a class="pub-media" href="https://pointzero-wm.github.io/">
+          <video autoplay muted loop playsinline><source src="vids/main/pointzero.mp4" type="video/mp4"></video>
+        </a>
+        <div>
+          <a class="pub-title" href="https://pointzero-wm.github.io/">PointZero: 3D Point Track Completion for Learning Transferable 3D Dynamics</a>
+          <p class="authors">
+            <a href="https://bart-ai.com">Bardienus P. Duisterhof</a>,
+            <a class="me" href="https://kywind.github.io/"><span class="me">Kaifeng Zhang</span></a>*,
+            <a href="https://adamhung60.github.io">Adam Hung</a>*,
+            <a href="https://wenbowen123.github.io">Bowen Wen</a>,
+            <a href="https://research.nvidia.com/person/stan-birchfield">Stan Birchfield</a>,
+            <a href="https://yunzhuli.github.io/">Yunzhu Li</a>,
+            <a href="https://www.cs.cmu.edu/~deva/">Deva Ramanan</a>,
+            <a href="https://ichnow.ski">Jeffrey Ichnowski</a>
+          </p>
+          <p class="venue">Preprint 2026</p>
+          <p class="pub-links">
+            <a href="https://pointzero-wm.github.io/">website</a>
+            <a href="https://arxiv.org/abs/2609.19142">arXiv</a>
+            <a href="https://arxiv.org/pdf/2609.19142.pdf">pdf</a>
+            <a href="https://github.com/Duisterhof/pointzero">code</a>
+          </p>
+          <p class="pub-desc">
+            We learn transferable 3D dynamics by pre-training on 3D point track completion, a robot-free and
+            interaction-agnostic objective, using a 2.9M-frame synthetic dataset spanning deformable, articulated,
+            and rigid objects.
+          </p>
+        </div>
+      </article>
+
+      <!-- Agentic Real2Sim -->
+      <article class="pub pub_all reveal">
+        <a class="pub-media" href="https://agentic-real2sim.github.io/">
+          <video autoplay muted loop playsinline><source src="vids/main/agentic-real2sim.mp4" type="video/mp4"></video>
+          <span class="media-badge left">Real</span>
+          <span class="media-badge right">Sim</span>
+        </a>
+        <div>
+          <a class="pub-title" href="https://agentic-real2sim.github.io/">Agentic Real2Sim: Physics-based World Modeling with Vision-Language Agents</a>
+          <p class="authors">
+            <a href="https://www.cs.ubc.ca/~gxchen/">Guanxiong Chen</a> et al.
+          </p>
+          <p class="venue">Preprint 2026</p>
+          <p class="pub-links">
+            <a href="https://agentic-real2sim.github.io/">website</a>
+            <a href="https://arxiv.org/abs/2607.19190">arXiv</a>
+            <a href="https://arxiv.org/pdf/2607.19190.pdf">pdf</a>
+            <a href="https://github.com/agentic-real2sim/agentic_real2sim">code</a>
+          </p>
+          <p class="pub-desc">
+            A vision-language-agent framework that converts real-world robot interaction videos into editable,
+            executable physics simulators, spanning rigid manipulation, deformable interactions, and humanoid motion.
+          </p>
+        </div>
+      </article>
+
+      <!-- PGRD -->
+      <article class="pub pub_all reveal">
+        <a class="pub-media" href="https://pgrd-robot.github.io/">
+          <video autoplay muted loop playsinline><source src="vids/main/pgrd.mp4" type="video/mp4"></video>
+        </a>
+        <div>
+          <a class="pub-title" href="https://pgrd-robot.github.io/">Learning Physics-Guided Residual Dynamics for Deformable Object Simulation</a>
+          <p class="authors">
+            <a href="https://shivanshpatel35.github.io/">Shivansh Patel</a>,
+            <a class="me" href="https://kywind.github.io/"><span class="me">Kaifeng Zhang</span></a>*,
+            <a href="https://www.linkedin.com/in/sanjaypokkali/">Sanjay Pokkali</a>*,
+            <a href="https://slazebni.cs.illinois.edu/">Svetlana Lazebnik</a>,
+            <a href="https://yunzhuli.github.io/">Yunzhu Li</a>
+          </p>
+          <p class="venue">CoRL 2026</p>
+          <p class="pub-links">
+            <a href="https://pgrd-robot.github.io/">website</a>
+            <a href="https://arxiv.org/abs/2607.13451">arXiv</a>
+            <a href="https://arxiv.org/pdf/2607.13451.pdf">pdf</a>
+            <a href="https://github.com/shivanshpatel35/pgrd">code</a>
+          </p>
+          <p class="pub-desc">
+            A hybrid simulation framework that combines an optimizable spring-mass simulator with a learned neural
+            network predicting residual corrections, improving deformable object dynamics for robotic manipulation.
+          </p>
+        </div>
+      </article>
+
+      <!-- ManipulationNet -->
+      <article class="pub pub_all reveal">
+        <a class="pub-media" href="https://manipulation-net.org/">
+          <video autoplay muted loop playsinline><source src="vids/main/manipulationnet.mp4" type="video/mp4"></video>
+        </a>
+        <div>
+          <a class="pub-title" href="https://manipulation-net.org/">ManipulationNet: An Infrastructure for Benchmarking Real-World Robot Manipulation with Physical Skill Challenges and Embodied Multimodal Reasoning</a>
+          <p class="authors">
+            Yiting Chen et al.
+          </p>
+          <p class="venue">Preprint 2026</p>
+          <p class="pub-links">
+            <a href="https://manipulation-net.org/">website</a>
+            <a href="https://arxiv.org/abs/2603.04363">arXiv</a>
+            <a href="https://arxiv.org/pdf/2603.04363.pdf">pdf</a>
+            <a href="https://github.com/ManipulationNet/mnet_client">code</a>
+          </p>
+          <p class="pub-desc">
+            A global infrastructure for benchmarking real-world robot manipulation, supported by NIST, delivering
+            reproducible task setups via standardized hardware kits and a unified software client across a Physical
+            Skills Track and an Embodied Reasoning Track.
+          </p>
+        </div>
+      </article>
 
       <!-- Real2Sim-Eval -->
       <article class="pub pub_selected is-rep reveal">
@@ -570,7 +702,7 @@
       <!-- Self-Pose -->
       <article class="pub pub_all reveal">
         <a class="pub-media" href="https://kywind.github.io/self-pose">
-          <video autoplay muted loop playsinline><source src="vids/main/self-pose-2.mp4" type="video/mp4"></video>
+          <video autoplay muted loop playsinline><source src="vids/main/self-pose.mp4" type="video/mp4"></video>
         </a>
         <div>
           <a class="pub-title" href="https://kywind.github.io/self-pose">Self-Supervised Geometric Correspondence for Category-Level 6D Object Pose Estimation in the Wild</a>
@@ -639,7 +771,7 @@
       document.getElementById("select0").classList.toggle("active", mode === 0);
       document.getElementById("select1").classList.toggle("active", mode === 1);
     }
-    showPubs(1);
+    showPubs(0);
 
     // ---- Email reveal ----
     const emailLink = document.getElementById("email-link");
