@@ -20,7 +20,7 @@ and ignored by Git; never edit it directly. Set `HUGO` to a Hugo executable path
 if it is not on your PATH.
 
 For live updates while writing only the blog, run `hugo server -D --source blog`.
-See `blog/README.md` for the writing workflow and theme attribution.
+See `_docs/blog.md` for the writing workflow and theme attribution.
 
 ## GitHub Pages deployment
 
