@@ -1,0 +1,13 @@
+/* A restrained reading layout; PaperMod handles responsive navigation. */
+:root { --main-width: 780px; }
+.home-info .entry-header h1 { font-size: clamp(28px, 5vw, 38px); line-height: 1.25; }
+.home-info { min-height: 240px; }
+.post-content { font-size: 18px; line-height: 1.8; }
+.post-content h2 { margin-top: 2.2em; }
+.post-content h3 { margin-top: 1.7em; }
+.post-content a { text-underline-offset: 3px; }
+.post-content figcaption { color: var(--secondary); font-size: 14px; text-align: center; }
+.post-content mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; padding: .35em 0; }
+.post-content .highlight pre { font-size: 14px; line-height: 1.6; }
+.toc { border-radius: 6px; }
+@media (max-width: 600px) { .post-content { font-size: 17px; } }

@@ -1,0 +1,60 @@
+baseURL: https://kywind.github.io/blog/
+locale: en-US
+title: Kaifeng's Notes
+theme: PaperMod
+pagination:
+  pagerSize: 8
+enableRobotsTXT: true
+outputs:
+  home: [HTML, RSS, JSON]
+params:
+  env: production
+  description: Notes and ideas by Kaifeng Zhang.
+  author: Kaifeng Zhang
+  defaultTheme: light
+  ShowReadingTime: true
+  ShowToc: true
+  TocOpen: true
+  ShowCodeCopyButtons: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  mainSections: [posts]
+  math: true
+  homeInfoParams:
+    Title: "Welcome to my blog"
+    Content: "Notes and ideas by [Kaifeng Zhang](https://kywind.github.io/)."
+  socialIcons:
+    - name: github
+      url: https://github.com/kywind
+    - name: rss
+      url: https://kywind.github.io/blog/index.xml
+menu:
+  main:
+    - name: Posts
+      url: /posts/
+      weight: 10
+    - name: Archive
+      url: /archives/
+      weight: 20
+    - name: Tags
+      url: /tags/
+      weight: 30
+    - name: Search
+      url: /search/
+      weight: 40
+    - name: Homepage
+      url: https://kywind.github.io/
+      weight: 50
+markup:
+  goldmark:
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block: [['\[', '\]'], ['$$', '$$']]
+          inline: [['\(', '\)'], ['$', '$']]
+  highlight:
+    noClasses: false
+  tableOfContents:
+    startLevel: 2
+    endLevel: 3
