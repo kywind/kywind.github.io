@@ -23,11 +23,6 @@ params:
   homeInfoParams:
     Title: "Welcome to my blog"
     Content: "Notes and ideas by [Kaifeng Zhang](https://kywind.github.io/)."
-  socialIcons:
-    - name: github
-      url: https://github.com/kywind
-    - name: rss
-      url: https://kywind.github.io/blog/index.xml
 menu:
   main:
     - name: Posts
