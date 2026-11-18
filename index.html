@@ -1,408 +1,877 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kaifeng Zhang</title>
-<meta name="author" content="Kaifeng Zhang">
-<meta name="description" content="Kaifeng Zhang — Ph.D. student at Columbia University working on robot learning, physics simulation, and real-to-sim-to-real methods.">
-<style>
-  body {
-    margin: 18px 22px;
-    padding: 0;
-    font-family: "Times New Roman", Times, serif;
-    font-size: 17px;
-    line-height: 1.5;
-    color: #1a1a1a;
-    background: #fff;
-  }
-  a, a:visited { color: #4a4a4a; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
-  a:hover { color: #000; }
-  a.on, a.on:visited { color: #1a1a1a; font-weight: bold; text-decoration: none; cursor: default; }
-  h1 { font-size: 2em; font-weight: normal; margin: 0 0 0.25em; }
-  h2 { font-size: 1.15em; margin: 1.8em 0 0.6em; }
-  hr { border: 0; border-top: 1px solid #bbb; margin: 1.6em 0; }
-  table.header { border-collapse: collapse; }
-  table.header td { vertical-align: top; padding: 0; }
-  table.header td.photo { padding-right: 1.6em; }
-  table.header img { width: 131px; height: 131px; object-fit: cover; display: block; margin-top: 3px; }
-  table.header h1 { line-height: 1; margin: 0 0 0.4em; }
-  table.header .gap { height: 0.8em; }
-  table.pubs { border-collapse: collapse; width: 100%; }
-  table.pubs td { vertical-align: top; padding: 0.8em 0; }
-  table.pubs td.media { width: 210px; padding-right: 1.4em; }
-  table.pubs td.media a { text-decoration: none; }
-  table.pubs td.media video, table.pubs td.media img { width: 210px; display: block; border: 0; }
-  .award { font-weight: bold; }
-  body.only-sel .star, body.only-sel .star-note { display: none; }
-  .tldr { margin-top: 0.35em; color: #444; }
-  body.js .tldr { display: none; }
-  body.js .tldr.open { display: block; }
-  a.tldr-btn.open { font-weight: bold; }
-  small { color: #555; }
-  @media (max-width: 560px) {
-    table.header td { display: block; }
-    table.header td.photo { padding: 0 0 1em; }
-    table.header img { width: 120px; height: 120px; margin-top: 0; }
-    table.pubs td { display: block; }
-    table.pubs td.media { width: auto; padding: 0.8em 0 0.4em; }
-    table.pubs td.media video, table.pubs td.media img { width: 100%; max-width: 320px; }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kaifeng Zhang</title>
+  <meta name="author" content="Kaifeng Zhang">
+  <meta name="description" content="Kaifeng Zhang — Ph.D. student at Columbia University working on robot learning, physics simulation, and real-to-sim-to-real methods.">
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --ink: #1a1a1a;
+      --muted: #6b6b6b;
+      --faint: #9a9a9a;
+      --line: #e7e5e0;
+      --accent: #7a1f1f;
+      --accent-soft: #f3ece6;
+      --highlight: #b70000;
+      --serif: "Newsreader", Georgia, serif;
+      --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --maxw: 900px;
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #131311;
+      --surface: #1b1b19;
+      --ink: #ececea;
+      --muted: #a3a29d;
+      --faint: #6f6e69;
+      --line: #2c2b28;
+      --accent: #e0a3a3;
+      --accent-soft: #241b1b;
+      --highlight: #ff6b6b;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      transition: color .18s ease, border-color .18s ease;
+    }
+    a:hover { color: var(--accent); border-color: var(--accent); }
+
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* ---------- theme toggle ---------- */
+    .theme-toggle {
+      position: fixed;
+      top: 20px; right: 20px;
+      z-index: 20;
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      padding: 3px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+    }
+    .theme-toggle button {
+      display: grid; place-items: center;
+      width: 30px; height: 30px;
+      border: none;
+      border-radius: 50%;
+      background: none;
+      color: var(--faint);
+      cursor: pointer;
+      transition: color .18s ease, background .18s ease;
+    }
+    .theme-toggle button:hover { color: var(--accent); }
+    .theme-toggle button.active { background: var(--ink); color: var(--bg); }
+    .theme-toggle svg { width: 16px; height: 16px; }
+
+    /* ---------- hero ---------- */
+    .hero {
+      padding: 96px 0 44px;
+      display: grid;
+      grid-template-columns: 1fr 176px;
+      gap: 48px;
+      align-items: start;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(32px, 5.5vw, 48px);
+      letter-spacing: -0.02em;
+      line-height: 1.02;
+      margin: 0 0 8px;
+    }
+    .hero .role {
+      font-family: var(--serif);
+      font-style: normal;
+      font-size: 19px;
+      color: var(--muted);
+      margin: 0 0 26px;
+    }
+    .hero .bio p {
+      margin: 0 0 15px;
+      color: #333;
+    }
+    :root[data-theme="dark"] .hero .bio p { color: var(--ink); }
+
+    .portrait {
+      width: 176px; height: 176px;
+      border-radius: 999px;
+      object-fit: cover;
+      transition: transform .4s ease;
+      border: 1px solid var(--line);
+    }
+    .portrait:hover { transform: scale(1.02); }
+
+    /* ---------- link row ---------- */
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 20px;
+      margin-top: 28px;
+      font-size: 15px;
+    }
+    .links a {
+      border: none;
+      color: var(--muted);
+      position: relative;
+      padding-bottom: 2px;
+    }
+    .links a::after {
+      content: "";
+      position: absolute; left: 0; bottom: 0;
+      width: 0; height: 1px; background: var(--accent);
+      transition: width .2s ease;
+    }
+    .links a:hover { color: var(--accent); }
+    .links a:hover::after { width: 100%; }
+
+    /* ---------- section headings ---------- */
+    .section { padding: 30px 0; }
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      border-top: 1px solid var(--line);
+      padding-top: 30px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+    .section-head h2 {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 30px;
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
+    .note { color: var(--faint); font-size: 13.5px; margin: 4px 0 26px; }
+    .note .hl-swatch {
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    /* ---------- toggle ---------- */
+    .toggle {
+      display: inline-flex;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      overflow: hidden;
+      font-size: 13px;
+    }
+    .toggle button {
+      background: none;
+      border: none;
+      color: var(--muted);
+      padding: 6px 16px;
+      cursor: pointer;
+      font-family: var(--sans);
+      transition: background .18s ease, color .18s ease;
+    }
+    .toggle button.active { background: var(--ink); color: var(--bg); }
+
+    /* ---------- publications ---------- */
+    .pub {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: 26px;
+      padding: 26px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: start;
+    }
+    .pub-media {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--accent-soft);
+      aspect-ratio: 16 / 10;
+    }
+    .pub-media img, .pub-media video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .pub-media.media-contain img, .pub-media.media-contain video {
+      object-fit: contain;
+      background: #17191d;
+    }
+    .media-badge {
+      position: absolute;
+      z-index: 2;
+      left: 8px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(16, 18, 22, .76);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      line-height: 1.4;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+    .media-badge.left { top: 8px; }
+    .media-badge.right { top: 8px; left: calc(50% + 8px); }
+    .pub.is-rep .pub-media::after {
+      content: "";
+      position: absolute; inset: 0;
+      box-shadow: inset 0 0 0 2px var(--accent);
+      border-radius: 8px;
+      pointer-events: none;
+    }
+    .pub-title {
+      font-family: var(--serif);
+      font-size: 21px;
+      font-weight: 500;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      display: inline;
+      border: none;
+    }
+    .pub-title:hover { color: var(--accent); }
+    .rep-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-family: var(--sans);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-radius: 4px;
+      padding: 2px 7px;
+      vertical-align: middle;
+      margin-left: 8px;
+    }
+    .authors { font-size: 14.5px; color: var(--ink); margin: 10px 0 4px; }
+    .authors a { border: none; color: var(--muted); }
+    .authors a:hover { color: var(--accent); }
+    .me { font-weight: 600; color: var(--ink); }
+    .venue { font-size: 14px; color: var(--muted); margin: 2px 0; }
+    .venue .award { color: var(--highlight); font-weight: 600; }
+    .pub-links { font-size: 13.5px; margin: 9px 0 0; display: flex; flex-wrap: wrap; gap: 4px 0; align-items: center; }
+    .pub-links a {
+      border: none; color: var(--muted); padding: 0 10px;
+      border-right: 1px solid var(--line);
+    }
+    .pub-links a:first-child { padding-left: 0; }
+    .pub-links a:last-child { border-right: none; }
+    .pub-links a:hover { color: var(--accent); }
+    .pub-desc { font-size: 14px; color: var(--muted); margin: 11px 0 0; line-height: 1.55; }
+
+    /* ---------- footer ---------- */
+    footer {
+      padding: 34px 0 60px;
+      color: var(--faint);
+      font-size: 13px;
+      text-align: right;
+    }
+    footer a { border: none; color: var(--faint); }
+    footer a:hover { color: var(--accent); }
+
+    /* ---------- reveal animation ---------- */
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 680px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding-top: 72px;
+      }
+      .portrait { width: 120px; height: 120px; order: -1; }
+      .pub { grid-template-columns: 1fr; gap: 16px; }
+      .pub-media { max-width: 320px; }
+    }
+  </style>
+  <noscript>
+    <style>
+      .reveal { opacity: 1 !important; transform: none !important; }
+      .theme-toggle { display: none; }
+    </style>
+  </noscript>
 </head>
 
 <body>
+  <div class="theme-toggle" role="group" aria-label="Color theme">
+    <button id="themeLight" aria-label="Bright mode" title="Bright">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+    </button>
+    <button id="themeDark" aria-label="Dark mode" title="Dark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path></svg>
+    </button>
+  </div>
 
-<table class="header">
-<tr>
-<td class="photo"><img src="images/profile3.jpg" alt="Kaifeng Zhang"></td>
-<td class="info">
-<h1>Kaifeng Zhang</h1>
-Ph.D. Student, <a href="https://www.columbia.edu/">Columbia University</a><br>
-<div class="gap"></div>
-kaifeng.z [at] columbia [dot] edu<br>
-<a href="pdf/resume-20260809.pdf">CV</a> /
-<a href="https://scholar.google.com/citations?user=jwkE2lgAAAAJ">Google Scholar</a> /
-<a href="https://github.com/kywind/">GitHub</a> /
-<a href="https://twitter.com/kaiwynd">Twitter</a> /
-<a href="https://www.linkedin.com/in/kaifeng-zhang-7b971625b/">LinkedIn</a> /
-<a href="blog/index.html">Blog</a>
-</td>
-</tr>
-</table>
+  <main class="wrap">
 
-<h2>About</h2>
+    <!-- ===================== HERO ===================== -->
+    <header class="hero reveal">
+      <div>
+        <h1>Kaifeng Zhang</h1>
+        <p class="role">Ph.D. Student, Columbia University</p>
+        <div class="bio">
+          <p>
+            I am a fourth-year Ph.D. student at Columbia, as part of the <a href="https://cail.columbia.edu/">Columbia Core AI Lab (CAIL)</a>,
+            advised by <a href="https://yunzhuli.github.io/">Yunzhu Li</a>.
+          </p>
+          <p>
+            My main research interest is robot learning, with a focus on understanding the role of physics simulators and
+            world models for robotic manipulation, and developing real-to-sim-to-real methods to build robust and performant
+            robotic manipulation systems. Previously, I was a research intern at
+            <a href="https://worldlabs.ai/">World Labs</a> and <a href="https://scenix.ai/">SceniX</a>.
+            My research is partially supported by the
+            <a href="https://www.qualcomm.com/research/university-relations/innovation-fellowship/2026-north-america">Qualcomm Innovation Fellowship</a>.
+          </p>
+          <p>
+            Before Columbia, I received my Bachelor's degree from <a href="https://www.tsinghua.edu.cn/en/">Tsinghua University</a>
+            <a href="https://iiis.tsinghua.edu.cn/en/">(Yao Class)</a>. I am fortunate to receive mentorship from
+            <a href="https://www.cs.columbia.edu/~cxz/">Changxi Zheng</a>,
+            <a href="https://kkhauser.web.illinois.edu/">Kris Hauser</a> during my Ph.D. study, and
+            <a href="https://xiaolonw.github.io/">Xiaolong Wang</a>, <a href="https://yang-gao.weebly.com/">Yang Gao</a>,
+            <a href="https://ericyi.github.io/">Li Yi</a> during my undergrad.
+          </p>
+        </div>
+        <nav class="links">
+          <a id="email-link" href="#" data-email-user="kaifeng.z" data-email-domain="columbia.edu">Email</a>
+          <a href="https://scholar.google.com/citations?user=jwkE2lgAAAAJ">Google Scholar</a>
+          <a href="https://github.com/kywind/">GitHub</a>
+          <a href="/blog/index.html">Blog</a>
+          <a href="https://twitter.com/kaiwynd">Twitter</a>
+          <a href="https://www.linkedin.com/in/kaifeng-zhang-7b971625b/">LinkedIn</a>
+          <a href="https://kywind.github.io/pdf/resume-20260809.pdf">CV</a>
+        </nav>
+      </div>
+      <img class="portrait" src="images/profile3.jpg" alt="Kaifeng Zhang">
+    </header>
 
-<p>
-I am a fourth-year Ph.D. student at Columbia, as part of the
-<a href="https://cail.columbia.edu/">Columbia Core AI Lab (CAIL)</a>,
-advised by <a href="https://yunzhuli.github.io/">Yunzhu Li</a>.
-</p>
+    <!-- ===================== PUBLICATIONS ===================== -->
+    <section class="section">
+      <div class="section-head reveal">
+        <h2>Publications</h2>
+        <div class="toggle" role="group" aria-label="Filter publications">
+          <button id="select0" class="active" onclick="showPubs(0)">Selected</button>
+          <button id="select1" onclick="showPubs(1)">All</button>
+        </div>
+      </div>
+      <p class="note reveal">
+        * indicates equal contribution. Representative papers are <span class="hl-swatch">highlighted</span>.
+      </p>
 
-<p>
-My main research interest is robot learning, with a focus on understanding the role of physics simulators and
-world models for robotic manipulation, and developing real-to-sim-to-real methods to build robust and performant
-robotic manipulation systems. Previously, I was a research intern at
-<a href="https://worldlabs.ai/">World Labs</a> and <a href="https://scenix.ai/">SceniX</a>.
-My research is partially supported by the
-<a href="https://www.qualcomm.com/research/university-relations/innovation-fellowship/2026-north-america">Qualcomm Innovation Fellowship</a>.
-</p>
+      <!-- Agentic Real2Sim2Real -->
+      <article class="pub pub_all reveal">
+        <a class="pub-media" style="aspect-ratio: 16 / 9" href="https://agentic-real2sim2real.github.io/" aria-label="Agentic Real2Sim2Real project website">
+          <video autoplay muted loop playsinline preload="metadata" poster="images/agentic-real2sim2real.jpg" aria-label="Zoom-out montage of randomized simulations for tape in box, cup nesting, whiteboard wiping, and cable routing"><source src="vids/main/agentic-real2sim2real.mp4" type="video/mp4"></video>
+        </a>
+        <div>
+          <a class="pub-title" href="https://agentic-real2sim2real.github.io/">Agentic Visuomotor Policy Learning via Real-to-Sim-to-Real</a>
+          <p class="authors">
+            <a class="me" href="https://kywind.github.io/"><span class="me">Kaifeng Zhang</span></a>,
+            <a href="https://chaoyuan.org/">Chao-Yuan Wu</a>,
+            <a href="https://yunzhuli.github.io/">Yunzhu Li</a>
+          </p>
+          <p class="venue"><a href="https://www.corl.org/contributions/call-for-late-breaking-results">CoRL 2026 LBR</a></p>
+          <p class="pub-links">
+            <a href="https://agentic-real2sim2real.github.io/">website</a>
+            <a href="https://agentic-real2sim2real.github.io/assets/paper.pdf">pdf</a>
+          </p>
+          <p class="pub-desc">
+            A coding agent turns one real demonstration per task into a simulated scene, generates randomized
+            demonstrations, and trains a visuomotor policy entirely in simulation for zero-shot transfer to real robots.
+          </p>
+        </div>
+      </article>
 
-<p>
-Before Columbia, I received my Bachelor's degree from <a href="https://www.tsinghua.edu.cn/en/">Tsinghua University</a>
-(<a href="https://iiis.tsinghua.edu.cn/en/">Yao Class</a>). I am fortunate to receive mentorship from
-<a href="https://www.cs.columbia.edu/~cxz/">Changxi Zheng</a> and
-<a href="https://kkhauser.web.illinois.edu/">Kris Hauser</a> during my Ph.D. study, and
-<a href="https://xiaolonw.github.io/">Xiaolong Wang</a>, <a href="https://yang-gao.weebly.com/">Yang Gao</a>, and
-<a href="https://ericyi.github.io/">Li Yi</a> during my undergrad.
-</p>
+      <!-- 3D World Simulator -->
+      <article class="pub pub_selected is-rep reveal">
+        <a class="pub-media" href="https://jwang771.github.io/3dworldsimulator/" aria-label="3D World Simulator project website">
+          <video autoplay muted loop playsinline preload="metadata" aria-label="3D World Simulator teaser"><source src="vids/main/3d-world-simulator.mp4" type="video/mp4"></video>
+        </a>
+        <div>
+          <a class="pub-title" href="https://jwang771.github.io/3dworldsimulator/">Hybrid Particle-Voxel Dynamics for Multimodal 3D World Simulation</a>
+          <p class="authors">
+            <a href="https://jwang771.github.io/">Jimmy Wang</a>,
+            <a href="https://yifan-chou.github.io/">Yifan Chou</a>,
+            <a class="me" href="https://kywind.github.io/"><span class="me">Kaifeng Zhang</span></a>,
+            <a href="https://wangyixuan12.github.io/">Yixuan Wang</a>,
+            <a href="https://binghao-huang.github.io/">Binghao Huang</a>,
+            <a href="https://www.linkedin.com/in/taoyumit">Tao Yu</a>,
+            <a href="https://www.linkedin.com/in/saleh-nabi-877ba573">Saleh Nabi</a>,
+            <a href="https://yunzhuli.github.io/">Yunzhu Li</a>
+          </p>
+          <p class="venue">Preprint 2026</p>
+          <p class="pub-links">
+            <a href="https://jwang771.github.io/3dworldsimulator/">website</a>
+            <a href="https://arxiv.org/abs/2611.04492">arXiv</a>
+            <a href="https://arxiv.org/pdf/2611.04492.pdf">pdf</a>
+            <a href="https://github.com/jwang771/3d-world-simulator">code</a>
+          </p>
+          <p class="pub-desc">
+            An action-conditioned 3D world model with hybrid particle-voxel dynamics that predicts 3D geometry,
+            tactile signals, and consistent renderings, from arbitrary viewpoints, stably across a long horizon.
+          </p>
+        </div>
+      </article>
 
-<h2>Publications</h2>
+      <!-- PointZero -->
+      <article class="pub pub_all reveal">
+        <a class="pub-media" href="https://pointzero-wm.github.io/">
+          <video autoplay muted loop playsinline><source src="vids/main/pointzero.mp4" type="video/mp4"></video>
+        </a>
+        <div>
+          <a class="pub-title" href="https://pointzero-wm.github.io/">PointZero: 3D Point Track Completion for Learning Transferable 3D Dynamics</a>
+          <p class="authors">
+            <a href="https://bart-ai.com">Bardienus P. Duisterhof</a>,
+            <a class="me" href="https://kywind.github.io/"><span class="me">Kaifeng Zhang</span></a>*,
+            <a href="https://adamhung60.github.io">Adam Hung</a>*,
+            <a href="https://wenbowen123.github.io">Bowen Wen</a>,
+            <a href="https://research.nvidia.com/person/stan-birchfield">Stan Birchfield</a>,
+            <a href="https://yunzhuli.github.io/">Yunzhu Li</a>,
+            <a href="https://www.cs.cmu.edu/~deva/">Deva Ramanan</a>,
+            <a href="https://ichnow.ski">Jeffrey Ichnowski</a>
+          </p>
+          <p class="venue">NeurIPS 2026</p>
+          <p class="pub-links">
+            <a href="https://pointzero-wm.github.io/">website</a>
+            <a href="https://arxiv.org/abs/2609.19142">arXiv</a>
+            <a href="https://arxiv.org/pdf/2609.19142.pdf">pdf</a>
+            <a href="https://github.com/Duisterhof/pointzero">code</a>
+          </p>
+          <p class="pub-desc">
+            We learn transferable 3D dynamics by pre-training on 3D point track completion, a robot-free and
+            interaction-agnostic objective, using a 2.9M-frame synthetic dataset spanning deformable, articulated,
+            and rigid objects.
+          </p>
+        </div>
+      </article>
 
-<p>Show: <a href="#" id="show-sel">selected</a> / <a href="#" id="show-all">all</a></p>
+      <!-- Agentic Real2Sim -->
+      <article class="pub pub_all reveal">
+        <a class="pub-media" href="https://agentic-real2sim.github.io/">
+          <video autoplay muted loop playsinline><source src="vids/main/agentic-real2sim.mp4" type="video/mp4"></video>
+          <span class="media-badge left">Real</span>
+          <span class="media-badge right">Sim</span>
+        </a>
+        <div>
+          <a class="pub-title" href="https://agentic-real2sim.github.io/">Agentic Real2Sim: Physics-based World Modeling with Vision-Language Agents</a>
+          <p class="authors">
+            <a href="https://www.cs.ubc.ca/~gxchen/">Guanxiong Chen</a> et al.
+          </p>
+          <p class="venue">Preprint 2026</p>
+          <p class="pub-links">
+            <a href="https://agentic-real2sim.github.io/">website</a>
+            <a href="https://arxiv.org/abs/2607.19190">arXiv</a>
+            <a href="https://arxiv.org/pdf/2607.19190.pdf">pdf</a>
+            <a href="https://github.com/agentic-real2sim/agentic_real2sim">code</a>
+          </p>
+          <p class="pub-desc">
+            A vision-language-agent framework that converts real-world robot interaction videos into editable,
+            executable physics simulators, spanning rigid manipulation, deformable interactions, and humanoid motion.
+          </p>
+        </div>
+      </article>
 
-<p><small>* equal contribution<span class="star-note"> &nbsp;&middot;&nbsp; <span class="star">&#9733;</span> representative papers</span></small></p>
+      <!-- PGRD -->
+      <article class="pub pub_all reveal">
+        <a class="pub-media" href="https://pgrd-robot.github.io/">
+          <video autoplay muted loop playsinline><source src="vids/main/pgrd.mp4" type="video/mp4"></video>
+        </a>
+        <div>
+          <a class="pub-title" href="https://pgrd-robot.github.io/">Learning Physics-Guided Residual Dynamics for Deformable Object Simulation</a>
+          <p class="authors">
+            <a href="https://shivanshpatel35.github.io/">Shivansh Patel</a>,
+            <a class="me" href="https://kywind.github.io/"><span class="me">Kaifeng Zhang</span></a>*,
+            <a href="https://www.linkedin.com/in/sanjaypokkali/">Sanjay Pokkali</a>*,
+            <a href="https://slazebni.cs.illinois.edu/">Svetlana Lazebnik</a>,
+            <a href="https://yunzhuli.github.io/">Yunzhu Li</a>
+          </p>
+          <p class="venue">CoRL 2026 <span class="award">(Spotlight)</span></p>
+          <p class="pub-links">
+            <a href="https://pgrd-robot.github.io/">website</a>
+            <a href="https://arxiv.org/abs/2607.13451">arXiv</a>
+            <a href="https://arxiv.org/pdf/2607.13451.pdf">pdf</a>
+            <a href="https://github.com/shivanshpatel35/pgrd">code</a>
+          </p>
+          <p class="pub-desc">
+            A hybrid simulation framework that combines an optimizable spring-mass simulator with a learned neural
+            network predicting residual corrections, improving deformable object dynamics for robotic manipulation.
+          </p>
+        </div>
+      </article>
 
-<table class="pubs">
+      <!-- ManipulationNet -->
+      <article class="pub pub_all reveal">
+        <a class="pub-media" href="https://manipulation-net.org/">
+          <video autoplay muted loop playsinline><source src="vids/main/manipulationnet.mp4" type="video/mp4"></video>
+        </a>
+        <div>
+          <a class="pub-title" href="https://manipulation-net.org/">ManipulationNet: An Infrastructure for Benchmarking Real-World Robot Manipulation with Physical Skill Challenges and Embodied Multimodal Reasoning</a>
+          <p class="authors">
+            Yiting Chen et al.
+          </p>
+          <p class="venue">Preprint 2026</p>
+          <p class="pub-links">
+            <a href="https://manipulation-net.org/">website</a>
+            <a href="https://arxiv.org/abs/2603.04363">arXiv</a>
+            <a href="https://arxiv.org/pdf/2603.04363.pdf">pdf</a>
+            <a href="https://github.com/ManipulationNet/mnet_client">code</a>
+          </p>
+          <p class="pub-desc">
+            A global infrastructure for benchmarking real-world robot manipulation, supported by NIST, delivering
+            reproducible task setups via standardized hardware kits and a unified software client across a Physical
+            Skills Track and an Embodied Reasoning Track.
+          </p>
+        </div>
+      </article>
 
-<tr>
-<td class="media"><a href="https://agentic-real2sim2real.github.io/"><video autoplay muted loop playsinline preload="metadata" poster="images/agentic-real2sim2real.jpg"><source src="vids/main/agentic-real2sim2real.mp4" type="video/mp4"></video></a></td>
-<td>
-<a href="https://agentic-real2sim2real.github.io/">Agentic Visuomotor Policy Learning via Real-to-Sim-to-Real</a><br>
-<b>Kaifeng Zhang</b>,
-<a href="https://chaoyuan.org/">Chao-Yuan Wu</a>,
-<a href="https://yunzhuli.github.io/">Yunzhu Li</a><br>
-<i>CoRL 2026 Late-Breaking Results</i><br>
-[<a href="https://agentic-real2sim2real.github.io/">website</a>]
-[<a href="https://agentic-real2sim2real.github.io/assets/paper.pdf">pdf</a>] [<a href="#" class="tldr-btn">tl;dr</a>]
-<div class="tldr">A coding agent turns one real demonstration per task into a simulated scene, generates randomized demonstrations, and trains a visuomotor policy entirely in simulation for zero-shot transfer to real robots.</div>
-</td>
-</tr>
+      <!-- Real2Sim-Eval -->
+      <article class="pub pub_selected is-rep reveal">
+        <a class="pub-media" href="https://real2sim-eval.github.io/">
+          <video autoplay muted loop playsinline><source src="vids/main/real2sim-eval.mp4" type="video/mp4"></video>
+        </a>
+        <div>
+          <a class="pub-title" href="https://real2sim-eval.github.io/">Real-to-Sim Robot Policy Evaluation with Gaussian Splatting Simulation of Soft-Body Interactions</a>          <p class="authors">
+            <a class="me" href="https://kywind.github.io/"><span class="me">Kaifeng Zhang</span></a>*,
+            <a href="https://shuosha.github.io/">Shuo Sha</a>*,
+            <a href="https://jianghanxiao.github.io/">Hanxiao Jiang</a>,
+            <a href="https://scholar.google.com/citations?user=xokChDMAAAAJ&hl=en">Matthew Loper</a>,
+            <a href="https://sites.google.com/nyu.edu/jay-hyunjong-song">Hyunjong Song</a>,
+            <a href="https://guangyancai.me/">Guangyan Cai</a>,
+            <a href="https://drzhuoxu.github.io/">Zhuo Xu</a>,
+            <a href="https://scholar.google.com/citations?user=-MaXMRAAAAAJ&hl=en">Xiaochen Hu</a>,
+            <a href="https://www.cs.columbia.edu/~cxz/">Changxi Zheng</a>,
+            <a href="https://yunzhuli.github.io/">Yunzhu Li</a>
+          </p>
+          <p class="venue">ICRA 2026</p>
+          <p class="venue">CVPR 2026 4DV Workshop <span class="award">(Oral Presentation)</span></p>
+          <p class="pub-links">
+            <a href="https://real2sim-eval.github.io/">website</a>
+            <a href="https://arxiv.org/abs/2511.04665">arXiv</a>
+            <a href="https://arxiv.org/abs/2511.04665.pdf">pdf</a>
+            <a href="https://github.com/kywind/real2sim-eval">code</a>
+          </p>
+          <p class="pub-desc">
+            A framework for robot policy evaluation in simulation environments, using Gaussian Splatting for rendering
+            and a soft-body digital twin for dynamics.
+          </p>
+        </div>
+      </article>
 
-<tr class="sel">
-<td class="media"><a href="https://jwang771.github.io/3dworldsimulator/"><video autoplay muted loop playsinline preload="metadata"><source src="vids/main/3d-world-simulator.mp4" type="video/mp4"></video></a></td>
-<td>
-<a href="https://jwang771.github.io/3dworldsimulator/">Hybrid Particle-Voxel Dynamics for Multimodal 3D World Simulation</a>&nbsp;<span class="star">&#9733;</span><br>
-<a href="https://jwang771.github.io/">Jimmy Wang</a>,
-<a href="https://yifan-chou.github.io/">Yifan Chou</a>,
-<b>Kaifeng Zhang</b>,
-<a href="https://wangyixuan12.github.io/">Yixuan Wang</a>,
-<a href="https://binghao-huang.github.io/">Binghao Huang</a>,
-<a href="https://www.linkedin.com/in/taoyumit">Tao Yu</a>,
-<a href="https://www.linkedin.com/in/saleh-nabi-877ba573">Saleh Nabi</a>,
-<a href="https://yunzhuli.github.io/">Yunzhu Li</a><br>
-<i>Preprint 2026</i><br>
-[<a href="https://jwang771.github.io/3dworldsimulator/">website</a>]
-[<a href="https://arxiv.org/abs/2611.04492">arXiv</a>]
-[<a href="https://arxiv.org/pdf/2611.04492.pdf">pdf</a>]
-[<a href="https://github.com/jwang771/3d-world-simulator">code</a>] [<a href="#" class="tldr-btn">tl;dr</a>]
-<div class="tldr">An action-conditioned 3D world model with hybrid particle-voxel dynamics that predicts 3D geometry, tactile signals, and consistent renderings, from arbitrary viewpoints, stably across a long horizon.</div>
-</td>
-</tr>
+      <!-- BoxTwin -->
+      <article class="pub pub_all reveal">
+        <a class="pub-media" href="https://scenix.ai/papers/BoxTwin.pdf">
+          <video autoplay muted loop playsinline><source src="vids/main/boxtwin.mp4" type="video/mp4"></video>
+        </a>
+        <div>
+          <a class="pub-title" href="https://scenix.ai/papers/BoxTwin.pdf">BoxTwin: Learning Elastoplastic Articulated Object Dynamics from Videos</a>
+          <p class="authors">
+            <a href="https://home.mediosz.club/">Heng Zhang</a>*,
+            <a href="https://github.com/GrahamZen">Gehan Zheng</a>*,
+            <a class="me" href="https://kywind.github.io/"><span class="me">Kaifeng Zhang</span></a>,
+            <a href="https://sites.google.com/nyu.edu/jay-hyunjong-song">Hyunjong Song</a>,
+            <a href="https://shivanshpatel35.github.io/">Shivansh Patel</a>,
+            <a href="https://scholar.google.com/citations?user=-MaXMRAAAAAJ&hl=en">Xiaochen Hu</a>,
+            <a href="https://yunzhuli.github.io/">Yunzhu Li</a>,
+            <a href="https://www.cs.columbia.edu/~cxz/">Changxi Zheng</a>,
+            <a href="https://peterchencyc.com/">Peter Yichen Chen</a>
+          </p>
+          <p class="venue">IROS 2025 RoDGE Workshop</p>
+          <p class="pub-desc">
+            An interactive digital twin construction (real-to-sim) framework that learns the full dynamics of
+            elastoplastic articulated objects from videos.
+          </p>
+        </div>
+      </article>
 
-<tr>
-<td class="media"><a href="https://pointzero-wm.github.io/"><video autoplay muted loop playsinline preload="metadata"><source src="vids/main/pointzero.mp4" type="video/mp4"></video></a></td>
-<td>
-<a href="https://pointzero-wm.github.io/">PointZero: 3D Point Track Completion for Learning Transferable 3D Dynamics</a><br>
-<a href="https://bart-ai.com">Bardienus P. Duisterhof</a>,
-<b>Kaifeng Zhang</b>*,
-<a href="https://adamhung60.github.io">Adam Hung</a>*,
-<a href="https://wenbowen123.github.io">Bowen Wen</a>,
-<a href="https://research.nvidia.com/person/stan-birchfield">Stan Birchfield</a>,
-<a href="https://yunzhuli.github.io/">Yunzhu Li</a>,
-<a href="https://www.cs.cmu.edu/~deva/">Deva Ramanan</a>,
-<a href="https://ichnow.ski">Jeffrey Ichnowski</a><br>
-<i>NeurIPS 2026</i><br>
-[<a href="https://pointzero-wm.github.io/">website</a>]
-[<a href="https://arxiv.org/abs/2609.19142">arXiv</a>]
-[<a href="https://arxiv.org/pdf/2609.19142.pdf">pdf</a>]
-[<a href="https://github.com/Duisterhof/pointzero">code</a>] [<a href="#" class="tldr-btn">tl;dr</a>]
-<div class="tldr">We learn transferable 3D dynamics by pre-training on 3D point track completion, a robot-free and interaction-agnostic objective, using a 2.9M-frame synthetic dataset spanning deformable, articulated, and rigid objects.</div>
-</td>
-</tr>
+      <!-- PhysTwin -->
+      <article class="pub pub_selected is-rep reveal">
+        <a class="pub-media" href="https://jianghanxiao.github.io/phystwin-web/">
+          <video autoplay muted loop playsinline><source src="vids/main/phystwin.mp4" type="video/mp4"></video>
+        </a>
+        <div>
+          <a class="pub-title" href="https://jianghanxiao.github.io/phystwin-web/">PhysTwin: Physics-Informed Reconstruction and Simulation of Deformable Objects from Videos</a>          <p class="authors">
+            <a href="https://jianghanxiao.github.io/">Hanxiao Jiang</a>,
+            <a href="https://haoyuhsu.github.io/">Hao-Yu Hsu</a>,
+            <a class="me" href="https://kywind.github.io/"><span class="me">Kaifeng Zhang</span></a>,
+            <a href="https://www.linkedin.com/in/hnyu/">Hsin-Ni Yu</a>,
+            <a href="https://shenlong.web.illinois.edu/">Shenlong Wang</a>,
+            <a href="https://yunzhuli.github.io/">Yunzhu Li</a>
+          </p>
+          <p class="venue">ICCV 2025</p>
+          <p class="pub-links">
+            <a href="https://jianghanxiao.github.io/phystwin-web/">website</a>
+            <a href="https://arxiv.org/abs/2503.17973">arXiv</a>
+            <a href="https://arxiv.org/abs/2503.17973.pdf">pdf</a>
+            <a href="https://github.com/Jianghanxiao/PhysTwin">code</a>
+          </p>
+          <p class="pub-desc">
+            We optimize a spring-mass physics model of deformable objects and integrate it with 3D Gaussian Splatting
+            for real-time re-simulation with rendering.
+          </p>
+        </div>
+      </article>
 
-<tr>
-<td class="media"><a href="https://agentic-real2sim.github.io/"><video autoplay muted loop playsinline preload="metadata"><source src="vids/main/agentic-real2sim.mp4" type="video/mp4"></video></a></td>
-<td>
-<a href="https://agentic-real2sim.github.io/">Agentic Real2Sim: Physics-based World Modeling with Vision-Language Agents</a><br>
-<a href="https://www.cs.ubc.ca/~gxchen/">Guanxiong Chen</a> et al.<br>
-<i>Preprint 2026</i><br>
-[<a href="https://agentic-real2sim.github.io/">website</a>]
-[<a href="https://arxiv.org/abs/2607.19190">arXiv</a>]
-[<a href="https://arxiv.org/pdf/2607.19190.pdf">pdf</a>]
-[<a href="https://github.com/agentic-real2sim/agentic_real2sim">code</a>] [<a href="#" class="tldr-btn">tl;dr</a>]
-<div class="tldr">A vision-language-agent framework that converts real-world robot interaction videos into editable, executable physics simulators, spanning rigid manipulation, deformable interactions, and humanoid motion.</div>
-</td>
-</tr>
+      <!-- PGND -->
+      <article class="pub pub_selected is-rep reveal">
+        <a class="pub-media" href="https://kywind.github.io/pgnd">
+          <video autoplay muted loop playsinline><source src="vids/main/pgnd.mp4" type="video/mp4"></video>
+        </a>
+        <div>
+          <a class="pub-title" href="https://kywind.github.io/pgnd">Particle-Grid Neural Dynamics for Learning Deformable Object Models from RGB-D Videos</a>          <p class="authors">
+            <a class="me" href="https://kywind.github.io/"><span class="me">Kaifeng Zhang</span></a>,
+            <a href="https://boey-li.github.io/">Baoyu Li</a>,
+            <a href="https://kkhauser.web.illinois.edu/">Kris Hauser</a>,
+            <a href="https://yunzhuli.github.io/">Yunzhu Li</a>
+          </p>
+          <p class="venue">RSS 2025</p>
+          <p class="pub-links">
+            <a href="https://kywind.github.io/pgnd">website</a>
+            <a href="https://arxiv.org/abs/2506.15680">arXiv</a>
+            <a href="https://arxiv.org/abs/2506.15680.pdf">pdf</a>
+            <a href="https://github.com/kywind/pgnd">code</a>
+            <a href="https://huggingface.co/spaces/kaifz/pgnd">demo</a>
+          </p>
+          <p class="pub-desc">
+            A neural particle-grid model for training dynamics models with real-world sparse-view RGB-D videos,
+            enabling high-quality future prediction and rendering.
+          </p>
+        </div>
+      </article>
 
-<tr>
-<td class="media"><a href="https://pgrd-robot.github.io/"><video autoplay muted loop playsinline preload="metadata"><source src="vids/main/pgrd.mp4" type="video/mp4"></video></a></td>
-<td>
-<a href="https://pgrd-robot.github.io/">Learning Physics-Guided Residual Dynamics for Deformable Object Simulation</a><br>
-<a href="https://shivanshpatel35.github.io/">Shivansh Patel</a>,
-<b>Kaifeng Zhang</b>*,
-<a href="https://www.linkedin.com/in/sanjaypokkali/">Sanjay Pokkali</a>*,
-<a href="https://slazebni.cs.illinois.edu/">Svetlana Lazebnik</a>,
-<a href="https://yunzhuli.github.io/">Yunzhu Li</a><br>
-<i>CoRL 2026</i> <span class="award">(Spotlight)</span><br>
-[<a href="https://pgrd-robot.github.io/">website</a>]
-[<a href="https://arxiv.org/abs/2607.13451">arXiv</a>]
-[<a href="https://arxiv.org/pdf/2607.13451.pdf">pdf</a>]
-[<a href="https://github.com/shivanshpatel35/pgrd">code</a>] [<a href="#" class="tldr-btn">tl;dr</a>]
-<div class="tldr">A hybrid simulation framework that combines an optimizable spring-mass simulator with a learned neural network predicting residual corrections, improving deformable object dynamics for robotic manipulation.</div>
-</td>
-</tr>
+      <!-- GS-Dynamics -->
+      <article class="pub pub_all reveal">
+        <a class="pub-media" href="https://gs-dynamics.github.io/">
+          <video autoplay muted loop playsinline><source src="vids/main/gaussian-gbnd.mp4" type="video/mp4"></video>
+        </a>
+        <div>
+          <a class="pub-title" href="https://gs-dynamics.github.io/">Dynamic 3D Gaussian Tracking for Graph-Based Neural Dynamics Modeling</a>
+          <p class="authors">
+            <a href="https://robo-alex.github.io/">Mingtong Zhang</a>*,
+            <a class="me" href="https://kywind.github.io/"><span class="me">Kaifeng Zhang</span></a>*,
+            <a href="https://yunzhuli.github.io/">Yunzhu Li</a>
+          </p>
+          <p class="venue">CoRL 2024</p>
+          <p class="pub-links">
+            <a href="https://gs-dynamics.github.io/">website</a>
+            <a href="https://arxiv.org/abs/2410.18912">arXiv</a>
+            <a href="https://arxiv.org/pdf/2410.18912.pdf">pdf</a>
+            <a href="https://github.com/robo-alex/gs-dynamics">code</a>
+            <a href="https://huggingface.co/spaces/kaifz/gs-dynamics">demo</a>
+          </p>
+          <p class="pub-desc">
+            We learn neural dynamics models of objects from real perception data and combine the learned model with
+            3D Gaussian Splatting for action-conditioned predictive rendering.
+          </p>
+        </div>
+      </article>
 
-<tr>
-<td class="media"><a href="https://manipulation-net.org/"><video autoplay muted loop playsinline preload="metadata"><source src="vids/main/manipulationnet.mp4" type="video/mp4"></video></a></td>
-<td>
-<a href="https://manipulation-net.org/">ManipulationNet: An Infrastructure for Benchmarking Real-World Robot Manipulation with Physical Skill Challenges and Embodied Multimodal Reasoning</a><br>
-Yiting Chen et al.<br>
-<i>Preprint 2026</i><br>
-[<a href="https://manipulation-net.org/">website</a>]
-[<a href="https://arxiv.org/abs/2603.04363">arXiv</a>]
-[<a href="https://arxiv.org/pdf/2603.04363.pdf">pdf</a>]
-[<a href="https://github.com/ManipulationNet/mnet_client">code</a>] [<a href="#" class="tldr-btn">tl;dr</a>]
-<div class="tldr">A global infrastructure for benchmarking real-world robot manipulation, supported by NIST, delivering reproducible task setups via standardized hardware kits and a unified software client across a Physical Skills Track and an Embodied Reasoning Track.</div>
-</td>
-</tr>
+      <!-- AdaptiGraph -->
+      <article class="pub pub_selected is-rep reveal">
+        <a class="pub-media" href="https://robopil.github.io/adaptigraph/">
+          <video autoplay muted loop playsinline><source src="vids/main/adaptigraph.mp4" type="video/mp4"></video>
+        </a>
+        <div>
+          <a class="pub-title" href="https://robopil.github.io/adaptigraph/">AdaptiGraph: Material-Adaptive Graph-Based Neural Dynamics for Robotic Manipulation</a>          <p class="authors">
+            <a class="me" href="https://kywind.github.io/"><span class="me">Kaifeng Zhang</span></a>*,
+            <a href="https://boey-li.github.io/">Baoyu Li</a>*,
+            <a href="https://kkhauser.web.illinois.edu/">Kris Hauser</a>,
+            <a href="https://yunzhuli.github.io/">Yunzhu Li</a>
+          </p>
+          <p class="venue">RSS 2024</p>
+          <p class="venue">ICRA 2024 RMDO Workshop <span class="award">(Best Abstract Award)</span></p>
+          <p class="pub-links">
+            <a href="https://robopil.github.io/adaptigraph/">website</a>
+            <a href="https://arxiv.org/abs/2407.07889">arXiv</a>
+            <a href="https://arxiv.org/pdf/2407.07889.pdf">pdf</a>
+            <a href="https://github.com/Boey-li/AdaptiGraph">code</a>
+          </p>
+          <p class="pub-desc">
+            We learn a material-conditioned neural dynamics model using a graph neural network to enable predictive
+            modeling of diverse real-world objects and efficient manipulation via model-based planning.
+          </p>
+        </div>
+      </article>
 
-<tr class="sel">
-<td class="media"><a href="https://real2sim-eval.github.io/"><video autoplay muted loop playsinline preload="metadata"><source src="vids/main/real2sim-eval.mp4" type="video/mp4"></video></a></td>
-<td>
-<a href="https://real2sim-eval.github.io/">Real-to-Sim Robot Policy Evaluation with Gaussian Splatting Simulation of Soft-Body Interactions</a>&nbsp;<span class="star">&#9733;</span><br>
-<b>Kaifeng Zhang</b>*,
-<a href="https://shuosha.github.io/">Shuo Sha</a>*,
-<a href="https://jianghanxiao.github.io/">Hanxiao Jiang</a>,
-<a href="https://scholar.google.com/citations?user=xokChDMAAAAJ&amp;hl=en">Matthew Loper</a>,
-<a href="https://sites.google.com/nyu.edu/jay-hyunjong-song">Hyunjong Song</a>,
-<a href="https://guangyancai.me/">Guangyan Cai</a>,
-<a href="https://drzhuoxu.github.io/">Zhuo Xu</a>,
-<a href="https://scholar.google.com/citations?user=-MaXMRAAAAAJ&amp;hl=en">Xiaochen Hu</a>,
-<a href="https://www.cs.columbia.edu/~cxz/">Changxi Zheng</a>,
-<a href="https://yunzhuli.github.io/">Yunzhu Li</a><br>
-<i>ICRA 2026</i>; <i>CVPR 2026 4DV Workshop</i> <span class="award">(Oral Presentation)</span><br>
-[<a href="https://real2sim-eval.github.io/">website</a>]
-[<a href="https://arxiv.org/abs/2511.04665">arXiv</a>]
-[<a href="https://arxiv.org/abs/2511.04665.pdf">pdf</a>]
-[<a href="https://github.com/kywind/real2sim-eval">code</a>] [<a href="#" class="tldr-btn">tl;dr</a>]
-<div class="tldr">A framework for robot policy evaluation in simulation environments, using Gaussian Splatting for rendering and a soft-body digital twin for dynamics.</div>
-</td>
-</tr>
+      <!-- 4DRecons -->
+      <article class="pub pub_all reveal">
+        <a class="pub-media" href="https://arxiv.org/abs/2406.10167">
+          <img src="images/4drecons.jpg" alt="4DRecons">
+        </a>
+        <div>
+          <a class="pub-title" href="https://arxiv.org/abs/2406.10167">4DRecons: 4D Neural Implicit Deformable Objects Reconstruction from a Single RGB-D Camera with Geometrical and Topological Regularizations</a>
+          <p class="authors">
+            <a href="https://xy-cong.github.io/">Xiaoyan Cong</a>,
+            <a href="https://yanghtr.github.io/">Haitao Yang</a>,
+            <a href="https://scholar.google.com/citations?user=ppaEV-8AAAAJ&hl=en">Liyan Chen</a>,
+            <a class="me" href="https://kywind.github.io/"><span class="me">Kaifeng Zhang</span></a>,
+            <a href="https://ericyi.github.io/">Li Yi</a>,
+            <a href="https://www.cs.utexas.edu/~bajaj/cvc/index.shtml">Chandrajit Bajaj</a>,
+            <a href="https://www.cs.utexas.edu/~huangqx/index.html">Qixing Huang</a>
+          </p>
+          <p class="venue">CVM 2026</p>
+          <p class="pub-desc">
+            We achieve 4D neural implicit reconstruction from only a single-view scan using deformation and topology
+            regularizations.
+          </p>
+        </div>
+      </article>
 
-<tr>
-<td class="media"><a href="https://scenix.ai/papers/BoxTwin.pdf"><video autoplay muted loop playsinline preload="metadata"><source src="vids/main/boxtwin.mp4" type="video/mp4"></video></a></td>
-<td>
-<a href="https://scenix.ai/papers/BoxTwin.pdf">BoxTwin: Learning Elastoplastic Articulated Object Dynamics from Videos</a><br>
-<a href="https://home.mediosz.club/">Heng Zhang</a>*,
-<a href="https://github.com/GrahamZen">Gehan Zheng</a>*,
-<b>Kaifeng Zhang</b>,
-<a href="https://sites.google.com/nyu.edu/jay-hyunjong-song">Hyunjong Song</a>,
-<a href="https://shivanshpatel35.github.io/">Shivansh Patel</a>,
-<a href="https://scholar.google.com/citations?user=-MaXMRAAAAAJ&amp;hl=en">Xiaochen Hu</a>,
-<a href="https://yunzhuli.github.io/">Yunzhu Li</a>,
-<a href="https://www.cs.columbia.edu/~cxz/">Changxi Zheng</a>,
-<a href="https://peterchencyc.com/">Peter Yichen Chen</a><br>
-<i>IROS 2025 RoDGE Workshop</i><br>
-[<a href="https://scenix.ai/papers/BoxTwin.pdf">pdf</a>] [<a href="#" class="tldr-btn">tl;dr</a>]
-<div class="tldr">An interactive digital twin construction (real-to-sim) framework that learns the full dynamics of elastoplastic articulated objects from videos.</div>
-</td>
-</tr>
+      <!-- Self-Pose -->
+      <article class="pub pub_all reveal">
+        <a class="pub-media" href="https://kywind.github.io/self-pose">
+          <video autoplay muted loop playsinline><source src="vids/main/self-pose.mp4" type="video/mp4"></video>
+        </a>
+        <div>
+          <a class="pub-title" href="https://kywind.github.io/self-pose">Self-Supervised Geometric Correspondence for Category-Level 6D Object Pose Estimation in the Wild</a>
+          <p class="authors">
+            <a class="me" href="https://kywind.github.io/"><span class="me">Kaifeng Zhang</span></a>,
+            <a href="https://oasisyang.github.io/">Yang Fu</a>,
+            <a href="https://scholar.google.com/citations?user=ZsgWCyMAAAAJ&hl=en">Shubhankar Borse</a>,
+            <a href="https://scholar.google.com/citations?user=9y3Kd3cAAAAJ&hl=en">Hong Cai</a>,
+            <a href="https://www.porikli.com/">Fatih Porikli</a>,
+            <a href="https://xiaolonw.github.io/">Xiaolong Wang</a>
+          </p>
+          <p class="venue">ICLR 2023</p>
+          <p class="pub-links">
+            <a href="https://kywind.github.io/self-pose">website</a>
+            <a href="https://arxiv.org/abs/2210.07199">arXiv</a>
+            <a href="https://arxiv.org/pdf/2210.07199.pdf">pdf</a>
+            <a href="https://github.com/kywind/self-corr-pose">code</a>
+          </p>
+          <p class="pub-desc">
+            A fully self-supervised method for category-level 6D object pose estimation by learning dense 2D-3D
+            geometric correspondences, trainable on image collections without any 3D annotations.
+          </p>
+        </div>
+      </article>
 
-<tr class="sel">
-<td class="media"><a href="https://jianghanxiao.github.io/phystwin-web/"><video autoplay muted loop playsinline preload="metadata"><source src="vids/main/phystwin.mp4" type="video/mp4"></video></a></td>
-<td>
-<a href="https://jianghanxiao.github.io/phystwin-web/">PhysTwin: Physics-Informed Reconstruction and Simulation of Deformable Objects from Videos</a>&nbsp;<span class="star">&#9733;</span><br>
-<a href="https://jianghanxiao.github.io/">Hanxiao Jiang</a>,
-<a href="https://haoyuhsu.github.io/">Hao-Yu Hsu</a>,
-<b>Kaifeng Zhang</b>,
-<a href="https://www.linkedin.com/in/hnyu/">Hsin-Ni Yu</a>,
-<a href="https://shenlong.web.illinois.edu/">Shenlong Wang</a>,
-<a href="https://yunzhuli.github.io/">Yunzhu Li</a><br>
-<i>ICCV 2025</i><br>
-[<a href="https://jianghanxiao.github.io/phystwin-web/">website</a>]
-[<a href="https://arxiv.org/abs/2503.17973">arXiv</a>]
-[<a href="https://arxiv.org/abs/2503.17973.pdf">pdf</a>]
-[<a href="https://github.com/Jianghanxiao/PhysTwin">code</a>] [<a href="#" class="tldr-btn">tl;dr</a>]
-<div class="tldr">We optimize a spring-mass physics model of deformable objects and integrate it with 3D Gaussian Splatting for real-time re-simulation with rendering.</div>
-</td>
-</tr>
+      <!-- SFC -->
+      <article class="pub pub_all reveal">
+        <a class="pub-media" href="https://arxiv.org/abs/2207.10456">
+          <img src="images/sfc-full.png" alt="Semantic-Aware Fine-Grained Correspondence">
+        </a>
+        <div>
+          <a class="pub-title" href="https://arxiv.org/abs/2207.10456">Semantic-Aware Fine-Grained Correspondence</a>
+          <p class="authors">
+            <a href="https://yingdong-hu.github.io/">Yingdong Hu</a>,
+            <a href="https://renwang435.github.io/">Renhao Wang</a>,
+            <a class="me" href="https://kywind.github.io/"><span class="me">Kaifeng Zhang</span></a>,
+            <a href="https://yang-gao.weebly.com/">Yang Gao</a>
+          </p>
+          <p class="venue">ECCV 2022 <span class="award">(Oral Presentation)</span></p>
+          <p class="pub-links">
+            <a href="https://arxiv.org/abs/2207.10456">arXiv</a>
+            <a href="https://arxiv.org/pdf/2207.10456.pdf">pdf</a>
+            <a href="https://github.com/Yingdong-Hu/SFC">code</a>
+          </p>
+          <p class="pub-desc">
+            We show that fusing fine-grained features learned with low-level contrastive objectives and semantic
+            features from image-level objectives can improve SSL pretraining.
+          </p>
+        </div>
+      </article>
 
-<tr class="sel">
-<td class="media"><a href="https://kywind.github.io/pgnd"><video autoplay muted loop playsinline preload="metadata"><source src="vids/main/pgnd.mp4" type="video/mp4"></video></a></td>
-<td>
-<a href="https://kywind.github.io/pgnd">Particle-Grid Neural Dynamics for Learning Deformable Object Models from RGB-D Videos</a>&nbsp;<span class="star">&#9733;</span><br>
-<b>Kaifeng Zhang</b>,
-<a href="https://boey-li.github.io/">Baoyu Li</a>,
-<a href="https://kkhauser.web.illinois.edu/">Kris Hauser</a>,
-<a href="https://yunzhuli.github.io/">Yunzhu Li</a><br>
-<i>RSS 2025</i><br>
-[<a href="https://kywind.github.io/pgnd">website</a>]
-[<a href="https://arxiv.org/abs/2506.15680">arXiv</a>]
-[<a href="https://arxiv.org/abs/2506.15680.pdf">pdf</a>]
-[<a href="https://github.com/kywind/pgnd">code</a>]
-[<a href="https://huggingface.co/spaces/kaifz/pgnd">demo</a>] [<a href="#" class="tldr-btn">tl;dr</a>]
-<div class="tldr">A neural particle-grid model for training dynamics models with real-world sparse-view RGB-D videos, enabling high-quality future prediction and rendering.</div>
-</td>
-</tr>
+    </section>
 
-<tr>
-<td class="media"><a href="https://gs-dynamics.github.io/"><video autoplay muted loop playsinline preload="metadata"><source src="vids/main/gaussian-gbnd.mp4" type="video/mp4"></video></a></td>
-<td>
-<a href="https://gs-dynamics.github.io/">Dynamic 3D Gaussian Tracking for Graph-Based Neural Dynamics Modeling</a><br>
-<a href="https://robo-alex.github.io/">Mingtong Zhang</a>*,
-<b>Kaifeng Zhang</b>*,
-<a href="https://yunzhuli.github.io/">Yunzhu Li</a><br>
-<i>CoRL 2024</i><br>
-[<a href="https://gs-dynamics.github.io/">website</a>]
-[<a href="https://arxiv.org/abs/2410.18912">arXiv</a>]
-[<a href="https://arxiv.org/pdf/2410.18912.pdf">pdf</a>]
-[<a href="https://github.com/robo-alex/gs-dynamics">code</a>]
-[<a href="https://huggingface.co/spaces/kaifz/gs-dynamics">demo</a>] [<a href="#" class="tldr-btn">tl;dr</a>]
-<div class="tldr">We learn neural dynamics models of objects from real perception data and combine the learned model with 3D Gaussian Splatting for action-conditioned predictive rendering.</div>
-</td>
-</tr>
+  </main>
 
-<tr class="sel">
-<td class="media"><a href="https://robopil.github.io/adaptigraph/"><video autoplay muted loop playsinline preload="metadata"><source src="vids/main/adaptigraph.mp4" type="video/mp4"></video></a></td>
-<td>
-<a href="https://robopil.github.io/adaptigraph/">AdaptiGraph: Material-Adaptive Graph-Based Neural Dynamics for Robotic Manipulation</a>&nbsp;<span class="star">&#9733;</span><br>
-<b>Kaifeng Zhang</b>*,
-<a href="https://boey-li.github.io/">Baoyu Li</a>*,
-<a href="https://kkhauser.web.illinois.edu/">Kris Hauser</a>,
-<a href="https://yunzhuli.github.io/">Yunzhu Li</a><br>
-<i>RSS 2024</i>; <i>ICRA 2024 RMDO Workshop</i> <span class="award">(Oral Presentation, Best Abstract Award)</span><br>
-[<a href="https://robopil.github.io/adaptigraph/">website</a>]
-[<a href="https://arxiv.org/abs/2407.07889">arXiv</a>]
-[<a href="https://arxiv.org/pdf/2407.07889.pdf">pdf</a>]
-[<a href="https://github.com/Boey-li/AdaptiGraph">code</a>] [<a href="#" class="tldr-btn">tl;dr</a>]
-<div class="tldr">We learn a material-conditioned neural dynamics model using a graph neural network to enable predictive modeling of diverse real-world objects and efficient manipulation via model-based planning.</div>
-</td>
-</tr>
-
-<tr>
-<td class="media"><a href="https://arxiv.org/abs/2406.10167"><img src="images/4drecons.jpg" alt="4DRecons"></a></td>
-<td>
-<a href="https://arxiv.org/abs/2406.10167">4DRecons: 4D Neural Implicit Deformable Objects Reconstruction from a Single RGB-D Camera with Geometrical and Topological Regularizations</a><br>
-<a href="https://xy-cong.github.io/">Xiaoyan Cong</a>,
-<a href="https://yanghtr.github.io/">Haitao Yang</a>,
-<a href="https://scholar.google.com/citations?user=ppaEV-8AAAAJ&amp;hl=en">Liyan Chen</a>,
-<b>Kaifeng Zhang</b>,
-<a href="https://ericyi.github.io/">Li Yi</a>,
-<a href="https://www.cs.utexas.edu/~bajaj/cvc/index.shtml">Chandrajit Bajaj</a>,
-<a href="https://www.cs.utexas.edu/~huangqx/index.html">Qixing Huang</a><br>
-<i>CVM 2026</i><br>
-[<a href="https://arxiv.org/abs/2406.10167">arXiv</a>] [<a href="#" class="tldr-btn">tl;dr</a>]
-<div class="tldr">We achieve 4D neural implicit reconstruction from only a single-view scan using deformation and topology regularizations.</div>
-</td>
-</tr>
-
-<tr>
-<td class="media"><a href="https://kywind.github.io/self-pose"><video autoplay muted loop playsinline preload="metadata"><source src="vids/main/self-pose.mp4" type="video/mp4"></video></a></td>
-<td>
-<a href="https://kywind.github.io/self-pose">Self-Supervised Geometric Correspondence for Category-Level 6D Object Pose Estimation in the Wild</a><br>
-<b>Kaifeng Zhang</b>,
-<a href="https://oasisyang.github.io/">Yang Fu</a>,
-<a href="https://scholar.google.com/citations?user=ZsgWCyMAAAAJ&amp;hl=en">Shubhankar Borse</a>,
-<a href="https://scholar.google.com/citations?user=9y3Kd3cAAAAJ&amp;hl=en">Hong Cai</a>,
-<a href="https://www.porikli.com/">Fatih Porikli</a>,
-<a href="https://xiaolonw.github.io/">Xiaolong Wang</a><br>
-<i>ICLR 2023</i><br>
-[<a href="https://kywind.github.io/self-pose">website</a>]
-[<a href="https://arxiv.org/abs/2210.07199">arXiv</a>]
-[<a href="https://arxiv.org/pdf/2210.07199.pdf">pdf</a>]
-[<a href="https://github.com/kywind/self-corr-pose">code</a>] [<a href="#" class="tldr-btn">tl;dr</a>]
-<div class="tldr">A fully self-supervised method for category-level 6D object pose estimation by learning dense 2D-3D geometric correspondences, trainable on image collections without any 3D annotations.</div>
-</td>
-</tr>
-
-<tr>
-<td class="media"><a href="https://arxiv.org/abs/2207.10456"><img src="images/sfc-full.png" alt="Semantic-Aware Fine-Grained Correspondence"></a></td>
-<td>
-<a href="https://arxiv.org/abs/2207.10456">Semantic-Aware Fine-Grained Correspondence</a><br>
-<a href="https://yingdong-hu.github.io/">Yingdong Hu</a>,
-<a href="https://renwang435.github.io/">Renhao Wang</a>,
-<b>Kaifeng Zhang</b>,
-<a href="https://yang-gao.weebly.com/">Yang Gao</a><br>
-<i>ECCV 2022</i> <span class="award">(Oral Presentation)</span><br>
-[<a href="https://arxiv.org/abs/2207.10456">arXiv</a>]
-[<a href="https://arxiv.org/pdf/2207.10456.pdf">pdf</a>]
-[<a href="https://github.com/Yingdong-Hu/SFC">code</a>] [<a href="#" class="tldr-btn">tl;dr</a>]
-<div class="tldr">We show that fusing fine-grained features learned with low-level contrastive objectives and semantic features from image-level objectives can improve SSL pretraining.</div>
-</td>
-</tr>
-
-</table>
-
-<script>
-(function () {
-  var rows = document.querySelectorAll('table.pubs tr');
-  var sel = document.getElementById('show-sel');
-  var all = document.getElementById('show-all');
-  function show(onlySelected) {
-    for (var i = 0; i < rows.length; i++) {
-      rows[i].style.display = (onlySelected && !rows[i].classList.contains('sel')) ? 'none' : '';
+  <script>
+    // ---- Publications toggle ----
+    function showPubs(mode) {
+      document.querySelectorAll('.pub_selected, .pub_all').forEach(pub => {
+        if (mode === 0) {
+          pub.style.display = pub.classList.contains('pub_selected') ? "" : "none";
+        } else {
+          pub.style.display = "";
+        }
+      });
+      document.getElementById("select0").classList.toggle("active", mode === 0);
+      document.getElementById("select1").classList.toggle("active", mode === 1);
     }
-    document.body.classList.toggle('only-sel', onlySelected);
-    sel.className = onlySelected ? 'on' : '';
-    all.className = onlySelected ? '' : 'on';
-  }
-  sel.addEventListener('click', function (e) { e.preventDefault(); show(true); });
-  all.addEventListener('click', function (e) { e.preventDefault(); show(false); });
-  show(true);
+    showPubs(0);
 
-  document.body.classList.add('js');
-  var btns = document.querySelectorAll('a.tldr-btn');
-  for (var j = 0; j < btns.length; j++) {
-    btns[j].addEventListener('click', function (e) {
-      e.preventDefault();
-      var d = this.parentNode.querySelector('.tldr');
-      var open = d.classList.toggle('open');
-      this.classList.toggle('open', open);
-    });
-  }
-})();
-</script>
+    // ---- Email reveal ----
+    const emailLink = document.getElementById("email-link");
+    if (emailLink) {
+      emailLink.addEventListener("click", function (event) {
+        event.preventDefault();
+        const email = emailLink.dataset.emailUser + "@" + emailLink.dataset.emailDomain;
+        if (emailLink.dataset.revealed === "true") {
+          emailLink.textContent = "Email";
+          emailLink.dataset.revealed = "false";
+        } else {
+          emailLink.textContent = email;
+          emailLink.dataset.revealed = "true";
+        }
+      });
+    }
 
+    // ---- Theme toggle (bright / dark, remembered across visits) ----
+    const root = document.documentElement;
+    const btnLight = document.getElementById("themeLight");
+    const btnDark = document.getElementById("themeDark");
+    function currentTheme() {
+      return root.getAttribute("data-theme") || "light";
+    }
+    function applyTheme(theme) {
+      root.setAttribute("data-theme", theme);
+      const dark = theme === "dark";
+      btnDark.classList.toggle("active", dark);
+      btnLight.classList.toggle("active", !dark);
+      try { localStorage.setItem("theme", theme); } catch (e) {}
+    }
+    try {
+      const saved = localStorage.getItem("theme");
+      if (saved) root.setAttribute("data-theme", saved);
+    } catch (e) {}
+    applyTheme(currentTheme());
+    btnLight.addEventListener("click", () => applyTheme("light"));
+    btnDark.addEventListener("click", () => applyTheme("dark"));
+
+    // ---- Reveal on scroll ----
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  </script>
 </body>
+
 </html>
