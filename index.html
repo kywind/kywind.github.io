@@ -8,7 +8,6 @@
 <meta name="description" content="Kaifeng Zhang — Ph.D. student at Columbia University working on robot learning, physics simulation, and real-to-sim-to-real methods.">
 <style>
   body {
-    max-width: 56em;
     margin: 18px 22px;
     padding: 0;
     font-family: "Times New Roman", Times, serif;
@@ -35,6 +34,7 @@
   table.pubs td.media a { text-decoration: none; }
   table.pubs td.media video, table.pubs td.media img { width: 210px; display: block; border: 0; }
   .award { font-weight: bold; }
+  body.only-sel .star, body.only-sel .star-note { display: none; }
   .tldr { margin-top: 0.35em; color: #444; }
   body.js .tldr { display: none; }
   body.js .tldr.open { display: block; }
@@ -101,7 +101,7 @@ Before Columbia, I received my Bachelor's degree from <a href="https://www.tsing
 
 <p>Show: <a href="#" id="show-sel">selected</a> / <a href="#" id="show-all">all</a></p>
 
-<p><small>* equal contribution &nbsp;&middot;&nbsp; <span class="star">&#9733;</span> representative papers</small></p>
+<p><small>* equal contribution<span class="star-note"> &nbsp;&middot;&nbsp; <span class="star">&#9733;</span> representative papers</span></small></p>
 
 <table class="pubs">
 
@@ -383,6 +383,7 @@ Yiting Chen et al.<br>
     for (var i = 0; i < rows.length; i++) {
       rows[i].style.display = (onlySelected && !rows[i].classList.contains('sel')) ? 'none' : '';
     }
+    document.body.classList.toggle('only-sel', onlySelected);
     sel.className = onlySelected ? 'on' : '';
     all.className = onlySelected ? '' : 'on';
   }
